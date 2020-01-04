@@ -1,8 +1,8 @@
 import React from "react";
-import TasksLog from "./components/TasksLog";
+import TasksChart from "./components/TasksChart";
 
 function App() {
-  return <TasksLog />;
+  return <TasksChart />;
 }
 
 export default App;
