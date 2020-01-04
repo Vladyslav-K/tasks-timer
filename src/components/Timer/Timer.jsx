@@ -12,7 +12,7 @@ class Timer extends Component {
     super(props);
   }
   render() {
-    const { timerContainer, taskInput, timerFab, button } = this.props.classes;
+    const { timerContainer, taskInput, timerFab, timerButton } = this.props.classes;
     return (
       <div className={timerContainer}>
         <div>
@@ -26,7 +26,7 @@ class Timer extends Component {
           <Fab className={timerFab}>00:00:00</Fab>
         </div>
         <div>
-          <Button variant="contained" size="small" className={button}>
+          <Button variant="contained" size="small" className={timerButton}>
             Start
           </Button>
         </div>

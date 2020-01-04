@@ -25,7 +25,7 @@ export default {
     fontSize: "1.5rem"
   },
 
-  button: {
+  timerButton: {
     color: violet,
     background: "white"
   }

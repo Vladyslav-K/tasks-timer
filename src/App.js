@@ -1,8 +1,8 @@
 import React from "react";
-import Timer from "./components/Timer";
+import TasksLog from "./components/TasksLog";
 
 function App() {
-  return <Timer />;
+  return <TasksLog />;
 }
 
 export default App;
