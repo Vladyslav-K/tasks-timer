@@ -48,11 +48,11 @@ const data = [
   }
 ];
 
-function TasksChart(props) {
+function Chart(props) {
   const { generateButtonContainer, generateButton } = props.classes;
   return (
     <div>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer id="container" width="90%" height={300}>
         <BarChart data={data} margin={{ top: 20 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="hour" />
@@ -78,4 +78,4 @@ function TasksChart(props) {
   );
 }
 
-export default withStyles(styles)(TasksChart);
+export default withStyles(styles)(Chart);

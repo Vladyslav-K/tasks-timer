@@ -2,7 +2,8 @@ const violet = "#4823C2";
 
 export default {
   timerContainer: {
-    marginBottom: "1.5rem"
+    marginBottom: "1.5rem",
+    textAlign: "center"
   },
 
   taskInput: {

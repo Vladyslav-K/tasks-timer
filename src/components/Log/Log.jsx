@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-function TasksLog(props) {
+function Log(props) {
   const { cyanogenRow, violetCell, noTasks, tasksButton } = props.classes;
   return (
     <Table>
@@ -51,4 +51,4 @@ function TasksLog(props) {
   );
 }
 
-export default withStyles(styles)(TasksLog);
+export default withStyles(styles)(Log);

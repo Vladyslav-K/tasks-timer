@@ -8,11 +8,13 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 class Timer extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
-    const { timerContainer, taskInput, timerFab, timerButton } = this.props.classes;
+    const {
+      timerContainer,
+      taskInput,
+      timerFab,
+      timerButton
+    } = this.props.classes;
     return (
       <div className={timerContainer}>
         <div>
