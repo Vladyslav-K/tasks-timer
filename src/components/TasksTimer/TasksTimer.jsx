@@ -19,7 +19,8 @@ class TasksTimer extends Component {
 
     const { location } = props;
 
-    const currentTab = (location.pathname === "/tasks/chart" && "Chart") || "Log";
+    const currentTab =
+      (location.pathname === "/chart" && "Chart") || "Log";
 
     this.state = {
       currentTab
@@ -53,19 +54,19 @@ class TasksTimer extends Component {
                     value="Log"
                     label="Tasks log"
                     component={Link}
-                    to={"/tasks/log"}
+                    to={"/"}
                   />
                   <Tab
                     value="Chart"
                     label="Tasks chart"
                     component={Link}
-                    to={"/tasks/chart"}
+                    to={"/chart"}
                   />
                 </Tabs>
               </AppBar>
 
-              <Route path={"/tasks/chart"} component={Chart} />
-              <Route path={"/tasks/log"} component={Log} />
+              <Route path="/" exact component={Log} />
+              <Route path="/chart" exact component={Chart} />
             </section>
           </Grid>
         </Grid>

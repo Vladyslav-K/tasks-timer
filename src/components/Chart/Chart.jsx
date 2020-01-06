@@ -52,7 +52,7 @@ function Chart(props) {
   const { generateButtonContainer, generateButton } = props.classes;
   return (
     <div>
-      <ResponsiveContainer id="container" width="90%" height={300}>
+      <ResponsiveContainer id="container" width="95%" height={300}>
         <BarChart data={data} margin={{ top: 20 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="hour" />

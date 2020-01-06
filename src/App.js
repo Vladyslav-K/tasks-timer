@@ -1,23 +1,23 @@
 import React from "react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducers from "./store/reducers";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import TasksTimer from "./components/TasksTimer";
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+const store = createStore(reducers);
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to={"/tasks/log"} />} />
-        <Route path={"/tasks/log"} component={TasksTimer} />
-        <Route path={"/tasks/chart"} component={TasksTimer} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={TasksTimer} />
+          <Route path="/chart" exact component={TasksTimer} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
