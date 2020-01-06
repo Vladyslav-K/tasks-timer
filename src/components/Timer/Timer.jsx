@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 
 import {
+  setTaskNameAction,
   startTimerAction,
   stopTimerAction,
   setTimeAction
@@ -66,6 +67,10 @@ class Timer extends Component {
     clearInterval(this.timer);
   };
 
+  setTaskName = event => {
+    setTaskNameAction(event.target.value);
+  };
+
   render() {
     const {
       timerContainer,
@@ -82,6 +87,7 @@ class Timer extends Component {
             label="Name of your task"
             placeholder="Name of your task"
             className={taskInput}
+            onChange={this.setTaskName}
           />
         </div>
         <div>
@@ -123,6 +129,7 @@ const mapStateToProps = ({ timer }) => {
 };
 
 const mapDispatchToProps = {
+  setTaskNameAction,
   startTimerAction,
   stopTimerAction,
   setTimeAction

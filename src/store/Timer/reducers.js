@@ -1,10 +1,11 @@
-import { START_TIMER, STOP_TIMER, SET_TIME } from "./actions";
+import { START_TIMER, STOP_TIMER, SET_TIME, SET_TASK_NAME } from "./actions";
 
 const initialState = {
   time: "00:00:00",
   timerIsStarted: false,
   timerStartTime: null,
-  timerStopTime: null
+  timerStopTime: null,
+  taskName: ""
 };
 
 export default function reducers(state = initialState, action) {
@@ -29,6 +30,12 @@ export default function reducers(state = initialState, action) {
       return {
         ...state,
         time: action.payload
+      };
+
+    case SET_TASK_NAME:
+      return {
+        ...state,
+        taskName: action.payload
       };
 
     default:
