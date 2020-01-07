@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import timerReducers from "./Timer/reducers";
+import timerReducer from "./Timer/reducers";
+import tasksLogReducer from "./Log/reducers";
 
 export default combineReducers({
-  timer: timerReducers
+  timer: timerReducer,
+  tasksLog: tasksLogReducer
 });
