@@ -12,25 +12,26 @@ import {
   stopTimerAction,
   setTimeAction
 } from "../../store/Timer/actions";
+import { pushTaskInTasksList } from "../../store/Log/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 class Timer extends Component {
   componentDidMount() {
-    const timeInLocalStorage = localStorage.getItem("timerStartTime");
-
-    if (timeInLocalStorage) {
-      this.props.startTimerAction(timeInLocalStorage);
-      this.setTime();
-    }
-
-    this.timer();
+    this.props.taskProps.timerStartTime
+      ? this.startTimerWhenPageReset()
+      : this.timer();
   }
+
+  startTimerWhenPageReset = () => {
+    this.setTime();
+    this.timer();
+  };
 
   timer = () => {
     setInterval(() => {
-      return this.props.timerStartTime
+      return this.props.taskProps.timerStartTime
         ? this.setTime()
         : this.props.setTimeAction("00:00:00");
     }, 1000);
@@ -39,11 +40,7 @@ class Timer extends Component {
   setTime = () => {
     this.props.setTimeAction(
       Interval.fromDateTimes(
-        DateTime.fromISO(
-          localStorage.getItem("timerStartTime")
-            ? localStorage.getItem("timerStartTime")
-            : this.props.timerStartTime
-        ),
+        DateTime.fromISO(this.props.taskProps.timerStartTime),
         DateTime.local()
       )
         .toDuration()
@@ -52,23 +49,33 @@ class Timer extends Component {
   };
 
   startTimer = () => {
-    const newDateTime = DateTime.local().toISO();
-
-    this.props.startTimerAction(newDateTime);
-
-    localStorage.setItem("timerStartTime", newDateTime);
+    this.props.startTimerAction(DateTime.local().toISO());
   };
 
   stopTimer = () => {
-    this.props.stopTimerAction(DateTime.local().toISO());
+    const { taskProps, stopTimerAction, pushTaskInTasksList } = this.props;
 
-    localStorage.clear();
+    stopTimerAction();
+
+    pushTaskInTasksList({
+      ...taskProps,
+      id: this.createTaskId(),
+      timerStopTime: DateTime.local().toISO()
+    });
 
     clearInterval(this.timer);
   };
 
   setTaskName = event => {
-    setTaskNameAction(event.target.value);
+    this.props.setTaskNameAction(event.target.value);
+  };
+
+  createTaskId = () => {
+    const { tasksList } = this.props;
+
+    const lastTaskId = Math.max(...tasksList.map(task => task.id));
+
+    return lastTaskId > 0 ? lastTaskId + 1 : 1;
   };
 
   render() {
@@ -79,56 +86,55 @@ class Timer extends Component {
       timerButton
     } = this.props.classes;
 
-    const { time, timerIsStarted } = this.props;
+    const {
+      time,
+      taskProps: { timerStartTime }
+    } = this.props;
     return (
       <div className={timerContainer}>
-        <div>
-          <TextField
-            label="Name of your task"
-            placeholder="Name of your task"
-            className={taskInput}
-            onChange={this.setTaskName}
-          />
-        </div>
-        <div>
-          <Fab className={timerFab}>{time}</Fab>
-        </div>
-        <div>
-          {timerIsStarted ? (
-            <Button
-              variant="contained"
-              size="small"
-              className={timerButton}
-              onClick={this.stopTimer}
-            >
-              STOP
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              size="small"
-              className={timerButton}
-              onClick={this.startTimer}
-            >
-              START
-            </Button>
-          )}
-        </div>
+        <TextField
+          label="Name of your task"
+          placeholder="Name of your task"
+          className={taskInput}
+          onChange={this.setTaskName}
+        />
+
+        <Fab className={timerFab}>{time}</Fab>
+        {timerStartTime ? (
+          <Button
+            variant="contained"
+            size="small"
+            className={timerButton}
+            onClick={this.stopTimer}
+          >
+            STOP
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            size="small"
+            className={timerButton}
+            onClick={this.startTimer}
+          >
+            START
+          </Button>
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ timer }) => {
+const mapStateToProps = ({ timer, tasksLog }) => {
   return {
     time: timer.time,
-    timerIsStarted: timer.timerIsStarted,
-    timerStartTime: timer.timerStartTime,
-    timerStopTime: timer.timerStopTime
+    taskProps: timer.taskProps,
+
+    tasksList: tasksLog.tasksList
   };
 };
 
 const mapDispatchToProps = {
+  pushTaskInTasksList,
   setTaskNameAction,
   startTimerAction,
   stopTimerAction,

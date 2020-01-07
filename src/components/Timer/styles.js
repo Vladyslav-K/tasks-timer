@@ -2,8 +2,9 @@ const violet = "#4823C2";
 
 export default {
   timerContainer: {
-    marginBottom: "1.5rem",
-    textAlign: "center"
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column"
   },
 
   taskInput: {
@@ -28,6 +29,7 @@ export default {
 
   timerButton: {
     color: violet,
-    background: "white"
+    background: "white",
+    marginBottom: "1.5rem"
   }
 };
