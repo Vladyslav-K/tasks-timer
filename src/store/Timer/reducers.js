@@ -1,29 +1,38 @@
-import { START_TIMER, STOP_TIMER, SET_TIME, SET_TASK_NAME } from "./actions";
+import {
+  START_TIMER,
+  STOP_TIMER,
+  SET_TIME,
+  SET_TASK_NAME,
+  SYNC_TASK_PROPS
+} from "./actions";
 
 const initialState = {
   time: "00:00:00",
-  timerIsStarted: false,
-  timerStartTime: null,
-  timerStopTime: null,
-  taskName: ""
+
+  taskProps: {
+    id: null,
+    taskName: null,
+    timerStartTime: null,
+    timerStopTime: null
+  }
 };
 
-export default function reducers(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case START_TIMER:
       return {
         ...state,
-        timerIsStarted: true,
-        timerStopTime: null,
-        timerStartTime: action.payload
+        taskProps: {
+          ...state.taskProps,
+          timerStopTime: null,
+          timerStartTime: action.payload
+        }
       };
 
     case STOP_TIMER:
       return {
         ...state,
-        timerIsStarted: false,
-        timerStartTime: null,
-        timerStopTime: action.payload
+        taskProps: initialState.taskProps
       };
 
     case SET_TIME:
@@ -35,7 +44,19 @@ export default function reducers(state = initialState, action) {
     case SET_TASK_NAME:
       return {
         ...state,
-        taskName: action.payload
+        taskProps: {
+          ...state.taskProps,
+          taskName: action.payload
+        }
+      };
+
+    case SYNC_TASK_PROPS:
+      return {
+        ...state,
+        taskProps: {
+          ...state.taskProps,
+          ...action.payload
+        }
       };
 
     default:

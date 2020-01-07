@@ -2,6 +2,7 @@ export const START_TIMER = "START_TIMER";
 export const STOP_TIMER = "STOP_TIMER";
 export const SET_TIME = "SET_TIME";
 export const SET_TASK_NAME = "SET_TASK_NAME";
+export const SYNC_TASK_PROPS = "SYNC_TASK_PROPS";
 
 export const startTimerAction = payload => {
   return { type: START_TIMER, payload };
@@ -17,4 +18,8 @@ export const setTimeAction = payload => {
 
 export const setTaskNameAction = payload => {
   return { type: SET_TASK_NAME, payload };
+};
+
+export const syncTaskProps = payload => {
+  return { type: SYNC_TASK_PROPS, payload };
 };
