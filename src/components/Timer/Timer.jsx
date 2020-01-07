@@ -66,10 +66,6 @@ class Timer extends Component {
     clearInterval(this.timer);
   };
 
-  setTaskName = event => {
-    this.props.setTaskNameAction(event.target.value);
-  };
-
   createTaskId = () => {
     const { tasksList } = this.props;
 
@@ -88,7 +84,8 @@ class Timer extends Component {
 
     const {
       time,
-      taskProps: { timerStartTime }
+      taskProps: { timerStartTime, taskName },
+      setTaskNameAction
     } = this.props;
     return (
       <div className={timerContainer}>
@@ -96,7 +93,8 @@ class Timer extends Component {
           label="Name of your task"
           placeholder="Name of your task"
           className={taskInput}
-          onChange={this.setTaskName}
+          value={taskName || ""}
+          onChange={event => setTaskNameAction(event.target.value)}
         />
 
         <Fab className={timerFab}>{time}</Fab>
