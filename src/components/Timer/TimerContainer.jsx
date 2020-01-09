@@ -81,14 +81,8 @@ class TimerContainer extends Component {
 
   render() {
     const {
-      timerContainer,
-      taskInput,
-      timerFab,
-      timerButton
-    } = this.props.classes;
-
-    const {
       time,
+      classes,
       taskProps: { timerStartTime, taskName },
       setTaskNameAction
     } = this.props;
@@ -98,13 +92,10 @@ class TimerContainer extends Component {
         setTaskNameAction={setTaskNameAction}
         verifyTaskName={this.verifyTaskName}
         timerStartTime={timerStartTime}
-        timerContainer={timerContainer}
         startTimer={this.startTimer}
-        timerButton={timerButton}
-        taskInput={taskInput}
-        timerFab={timerFab}
         taskName={taskName}
         time={time}
+        classes={classes}
       />
     );
   }

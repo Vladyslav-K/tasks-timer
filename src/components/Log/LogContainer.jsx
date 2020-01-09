@@ -8,17 +8,8 @@ import styles from "./styles";
 
 function LogContainer(props) {
   const { tasksList, classes } = props;
-  const { cyanogenRow, violetCell, noTasks, tasksButton } = classes;
 
-  return (
-    <Log
-      cyanogenRow={cyanogenRow}
-      tasksButton={tasksButton}
-      violetCell={violetCell}
-      tasksList={tasksList}
-      noTasks={noTasks}
-    />
-  );
+  return <Log tasksList={tasksList} classes={classes} />;
 }
 
 const mapStateToProps = ({ tasksLog }) => {

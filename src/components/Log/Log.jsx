@@ -9,7 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
 export default function Log(props) {
-  const { cyanogenRow, violetCell, noTasks, tasksButton, tasksList } = props;
+  const { tasksList, classes } = props;
+  const { cyanogenRow, violetCell, noTasks, tasksButton } = classes;
 
   return (
     <Table>

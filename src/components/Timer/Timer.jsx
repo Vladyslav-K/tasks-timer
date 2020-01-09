@@ -9,14 +9,14 @@ export default function Timer(props) {
     setTaskNameAction,
     verifyTaskName,
     timerStartTime,
-    timerContainer,
-    timerButton,
     startTimer,
-    taskInput,
-    timerFab,
     taskName,
-    time
+    time,
+
+    classes
   } = props;
+
+  const { timerContainer, taskInput, timerFab, timerButton } = classes;
 
   return (
     <div className={timerContainer}>

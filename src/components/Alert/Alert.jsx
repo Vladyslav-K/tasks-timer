@@ -6,16 +6,16 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 export default function Alert(props) {
+  const { openAlertWindow, taskNameIsEmpty, classes } = props;
+
   const {
-    openAlertWindow,
     buttonContainer,
-    taskNameIsEmpty,
     modalContainer,
     modalContent,
     alertContent,
     alertName,
     modal
-  } = props;
+  } = classes;
 
   return (
     <Modal
