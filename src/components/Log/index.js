@@ -1,2 +1,2 @@
-import Log from "./Log";
-export default Log;
+import LogContainer from "./LogContainer";
+export default LogContainer;
