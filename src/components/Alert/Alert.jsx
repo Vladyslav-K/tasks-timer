@@ -1,15 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import Modal from "@material-ui/core/Modal";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
-import { taskNameIsEmpty } from "../../store/Alert/actions";
-
-import { withStyles } from "@material-ui/core/styles";
-import styles from "./styles";
 
 function Alert(props) {
   const { emptyTaskName, taskNameIsEmpty, classes } = props;
@@ -56,17 +50,4 @@ function Alert(props) {
   );
 }
 
-const mapStateToProps = ({ alert }) => {
-  return {
-    emptyTaskName: alert.emptyTaskName
-  };
-};
-
-const mapDispatchToProps = {
-  taskNameIsEmpty
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Alert));
+export default Alert;

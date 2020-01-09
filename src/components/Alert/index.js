@@ -1,2 +1,2 @@
-import Alert from "./Alert";
-export default Alert;
+import AlertContainer from "./AlertContainer";
+export default AlertContainer;
