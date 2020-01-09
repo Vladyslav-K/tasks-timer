@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-function Alert(props) {
+export default function Alert(props) {
   const { emptyTaskName, taskNameIsEmpty, classes } = props;
   return (
     <Modal
@@ -49,5 +49,3 @@ function Alert(props) {
     </Modal>
   );
 }
-
-export default Alert;

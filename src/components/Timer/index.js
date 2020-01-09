@@ -1,2 +1,2 @@
-import Timer from "./Timer";
-export default Timer;
+import TimerContainer from "./TimerContainer";
+export default TimerContainer;
