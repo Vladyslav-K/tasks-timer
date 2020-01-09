@@ -1,4 +1,5 @@
 import React from "react";
+import { DateTime, Interval } from "luxon";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,11 +8,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
-import { withStyles } from "@material-ui/core/styles";
-import styles from "./styles";
+export default function Log(props) {
+  const { cyanogenRow, violetCell, noTasks, tasksButton, tasksList } = props;
 
-function Log(props) {
-  const { cyanogenRow, violetCell, noTasks, tasksButton } = props.classes;
   return (
     <Table>
       <TableHead>
@@ -26,29 +25,55 @@ function Log(props) {
         </TableRow>
       </TableHead>
       <TableBody>
-        <TableRow className={cyanogenRow}>
-          <TableCell className={noTasks} colSpan={7}>No tasks to show</TableCell>
-        </TableRow>
-        <TableRow className={cyanogenRow}>
-          <TableCell className={violetCell} component="th" scope="row">1</TableCell>
-          <TableCell className={violetCell}>Create tasks log</TableCell>
-          <TableCell className={violetCell}>02:50:00</TableCell>
-          <TableCell className={violetCell}>03:10:00</TableCell>
-          <TableCell className={violetCell}>00:20:00</TableCell>
-          <TableCell className={violetCell}>
-            <Button className={tasksButton} variant="contained" size="small">
-              Info
-            </Button>
-          </TableCell>
-          <TableCell>
-            <Button className={tasksButton} variant="contained" size="small">
-              Delete
-            </Button>
-          </TableCell>
-        </TableRow>
+        {tasksList.length > 0 ? (
+          tasksList.map(task => (
+            <TableRow className={cyanogenRow}>
+              <TableCell className={violetCell} component="th" scope="row">
+                {task.id}
+              </TableCell>
+              <TableCell className={violetCell}>{task.taskName}</TableCell>
+              <TableCell className={violetCell}>
+                {DateTime.fromISO(task.timerStartTime).toFormat("HH:mm:ss")}
+              </TableCell>
+              <TableCell className={violetCell}>
+                {DateTime.fromISO(task.timerStopTime).toFormat("HH:mm:ss")}
+              </TableCell>
+              <TableCell className={violetCell}>
+                {Interval.fromDateTimes(
+                  DateTime.fromISO(task.timerStartTime),
+                  DateTime.fromISO(task.timerStopTime)
+                )
+                  .toDuration()
+                  .toFormat("hh:mm:ss")}
+              </TableCell>
+              <TableCell className={violetCell}>
+                <Button
+                  className={tasksButton}
+                  variant="contained"
+                  size="small"
+                >
+                  Info
+                </Button>
+              </TableCell>
+              <TableCell>
+                <Button
+                  className={tasksButton}
+                  variant="contained"
+                  size="small"
+                >
+                  Delete
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))
+        ) : (
+          <TableRow className={cyanogenRow}>
+            <TableCell className={noTasks} colSpan={7}>
+              No tasks to show
+            </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );
 }
-
-export default withStyles(styles)(Log);
