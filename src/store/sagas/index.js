@@ -28,8 +28,9 @@ export function* setStateFromStorage() {
   });
 
   const taskProps = yield call(() => {
-    return JSON.parse(
-      localStorage.getItem("startTimeAndTaskName") || stopTimerAction()
+    return (
+      JSON.parse(localStorage.getItem("startTimeAndTaskName")) ||
+      stopTimerAction()
     );
   });
 

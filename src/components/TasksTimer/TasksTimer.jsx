@@ -7,6 +7,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import Timer from "../Timer";
+import Alert from "../Alert";
 import Chart from "../Chart";
 import Log from "../Log";
 
@@ -19,8 +20,7 @@ class TasksTimer extends Component {
 
     const { location } = props;
 
-    const currentTab =
-      (location.pathname === "/chart" && "Chart") || "Log";
+    const currentTab = (location.pathname === "/chart" && "Chart") || "Log";
 
     this.state = {
       currentTab
@@ -40,6 +40,7 @@ class TasksTimer extends Component {
       <div className={tasksTimerContainer}>
         <Grid container justify="center">
           <Grid item xs={12} lg={10}>
+            <Alert />
             <Timer />
           </Grid>
           <Grid item xs={12} lg={10}>

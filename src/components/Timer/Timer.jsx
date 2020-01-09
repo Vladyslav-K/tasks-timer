@@ -13,6 +13,7 @@ import {
   setTimeAction
 } from "../../store/Timer/actions";
 import { pushTaskInTasksList } from "../../store/Log/actions";
+import { taskNameIsEmpty } from "../../store/Alert/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
@@ -50,6 +51,12 @@ class Timer extends Component {
 
   startTimer = () => {
     this.props.startTimerAction(DateTime.local().toISO());
+  };
+
+  verifyTaskName = () => {
+    const { taskProps, taskNameIsEmpty } = this.props;
+
+    taskProps.taskName ? this.stopTimer() : taskNameIsEmpty(true);
   };
 
   stopTimer = () => {
@@ -103,7 +110,7 @@ class Timer extends Component {
             variant="contained"
             size="small"
             className={timerButton}
-            onClick={this.stopTimer}
+            onClick={this.verifyTaskName}
           >
             STOP
           </Button>
@@ -136,7 +143,9 @@ const mapDispatchToProps = {
   setTaskNameAction,
   startTimerAction,
   stopTimerAction,
-  setTimeAction
+  setTimeAction,
+
+  taskNameIsEmpty
 };
 
 export default connect(
