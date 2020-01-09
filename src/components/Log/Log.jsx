@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
 export default function Log(props) {
-  const { tasksList, classes } = props;
+  const { deleteCurrentTask, tasksList, classes } = props;
   const { cyanogenRow, violetCell, noTasks, tasksButton } = classes;
 
   return (
@@ -28,7 +28,7 @@ export default function Log(props) {
       <TableBody>
         {tasksList.length > 0 ? (
           tasksList.map(task => (
-            <TableRow className={cyanogenRow}>
+            <TableRow key={task.id} className={cyanogenRow}>
               <TableCell className={violetCell} component="th" scope="row">
                 {task.id}
               </TableCell>
@@ -61,6 +61,7 @@ export default function Log(props) {
                   className={tasksButton}
                   variant="contained"
                   size="small"
+                  onClick={() => deleteCurrentTask(task.id)}
                 >
                   Delete
                 </Button>

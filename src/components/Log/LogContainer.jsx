@@ -3,13 +3,29 @@ import { connect } from "react-redux";
 
 import Log from "./Log";
 
+import { deleteTask } from "../../store/Log/actions";
+
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 function LogContainer(props) {
-  const { tasksList, classes } = props;
+  const { deleteTask, tasksList, classes } = props;
 
-  return <Log tasksList={tasksList} classes={classes} />;
+  const deleteCurrentTask = id => {
+    const tasksListWithoutCurrentTask = tasksList.filter(
+      task => task.id !== id
+    );
+
+    deleteTask(tasksListWithoutCurrentTask);
+  };
+
+  return (
+    <Log
+      deleteCurrentTask={deleteCurrentTask}
+      tasksList={tasksList}
+      classes={classes}
+    />
+  );
 }
 
 const mapStateToProps = ({ tasksLog }) => {
@@ -18,4 +34,9 @@ const mapStateToProps = ({ tasksLog }) => {
   };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(LogContainer));
+const mapDispatchToProps = { deleteTask };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(LogContainer));
