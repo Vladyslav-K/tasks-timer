@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import Alert from "./Alert";
 
-import { taskNameIsEmpty } from "../../store/Alert/actions";
+import { openAlertWindow } from "../../store/Alert/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 function AlertContainer(props) {
-  const { emptyTaskName, taskNameIsEmpty, classes } = props;
+  const { taskNameIsEmpty, openAlertWindow, classes } = props;
 
   const {
     buttonContainer,
@@ -22,10 +22,10 @@ function AlertContainer(props) {
 
   return (
     <Alert
-      taskNameIsEmpty={taskNameIsEmpty}
+      openAlertWindow={openAlertWindow}
       buttonContainer={buttonContainer}
+      taskNameIsEmpty={taskNameIsEmpty}
       modalContainer={modalContainer}
-      emptyTaskName={emptyTaskName}
       modalContent={modalContent}
       alertContent={alertContent}
       alertName={alertName}
@@ -36,12 +36,12 @@ function AlertContainer(props) {
 
 const mapStateToProps = ({ alert }) => {
   return {
-    emptyTaskName: alert.emptyTaskName
+    taskNameIsEmpty: alert.taskNameIsEmpty
   };
 };
 
 const mapDispatchToProps = {
-  taskNameIsEmpty
+  openAlertWindow
 };
 
 export default connect(

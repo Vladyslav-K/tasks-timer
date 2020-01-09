@@ -1,5 +1,5 @@
-export const TASK_NAME_IS_EMPTY = "TASK_NAME_IS_EMPTY";
+export const OPEN_ALERT_WINDOW = "OPEN_ALERT_WINDOW";
 
-export const taskNameIsEmpty = payload => {
-  return { type: TASK_NAME_IS_EMPTY, payload };
+export const openAlertWindow = payload => {
+  return { type: OPEN_ALERT_WINDOW, payload };
 };

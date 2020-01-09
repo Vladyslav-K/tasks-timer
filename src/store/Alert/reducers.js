@@ -1,15 +1,15 @@
-import { TASK_NAME_IS_EMPTY } from "./actions";
+import { OPEN_ALERT_WINDOW } from "./actions";
 
 const initialState = {
-  emptyTaskName: false
+  taskNameIsEmpty: false
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case TASK_NAME_IS_EMPTY:
+    case OPEN_ALERT_WINDOW:
       return {
         ...state,
-        emptyTaskName: action.payload
+        taskNameIsEmpty: action.payload
       };
 
     default:

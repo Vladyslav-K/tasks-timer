@@ -11,7 +11,7 @@ import {
   setTimeAction
 } from "../../store/Timer/actions";
 import { pushTaskInTasksList } from "../../store/Log/actions";
-import { taskNameIsEmpty } from "../../store/Alert/actions";
+import { openAlertWindow } from "../../store/Alert/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
@@ -52,9 +52,9 @@ class TimerContainer extends Component {
   };
 
   verifyTaskName = () => {
-    const { taskProps, taskNameIsEmpty } = this.props;
+    const { taskProps, openAlertWindow } = this.props;
 
-    taskProps.taskName ? this.stopTimer() : taskNameIsEmpty(true);
+    taskProps.taskName ? this.stopTimer() : openAlertWindow(true);
   };
 
   stopTimer = () => {
@@ -126,7 +126,7 @@ const mapDispatchToProps = {
   stopTimerAction,
   setTimeAction,
 
-  taskNameIsEmpty
+  openAlertWindow
 };
 
 export default connect(

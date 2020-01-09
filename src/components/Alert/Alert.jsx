@@ -7,10 +7,10 @@ import Button from "@material-ui/core/Button";
 
 export default function Alert(props) {
   const {
-    taskNameIsEmpty,
+    openAlertWindow,
     buttonContainer,
+    taskNameIsEmpty,
     modalContainer,
-    emptyTaskName,
     modalContent,
     alertContent,
     alertName,
@@ -21,10 +21,7 @@ export default function Alert(props) {
     <Modal
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
-      open={emptyTaskName}
-      onClose={() => {
-        taskNameIsEmpty(false);
-      }}
+      open={taskNameIsEmpty}
       className={modalContainer}
     >
       <div className={modal}>
@@ -45,7 +42,7 @@ export default function Alert(props) {
         <div className={buttonContainer}>
           <Button
             onClick={() => {
-              taskNameIsEmpty(false);
+              openAlertWindow(false);
             }}
           >
             Close
