@@ -6,7 +6,17 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 export default function Alert(props) {
-  const { emptyTaskName, taskNameIsEmpty, classes } = props;
+  const {
+    taskNameIsEmpty,
+    buttonContainer,
+    modalContainer,
+    emptyTaskName,
+    modalContent,
+    alertContent,
+    alertName,
+    modal
+  } = props;
+
   return (
     <Modal
       aria-labelledby="simple-modal-title"
@@ -15,28 +25,24 @@ export default function Alert(props) {
       onClose={() => {
         taskNameIsEmpty(false);
       }}
-      className={classes.modalContainer}
+      className={modalContainer}
     >
-      <div className={classes.modal}>
-        <Grid container className={classes.modalContent}>
-          <Typography
-            variant="h6"
-            id="modal-title"
-            className={classes.alertName}
-          >
+      <div className={modal}>
+        <Grid container className={modalContent}>
+          <Typography variant="h6" id="modal-title" className={alertName}>
             Empty task name
           </Typography>
           <Typography
             variant="subtitle1"
             id="simple-modal-description"
-            className={classes.alertContant}
+            className={alertContent}
           >
             You are trying close your task without name, enter the title and try
             again!
           </Typography>
         </Grid>
 
-        <div className={classes.buttonContainer}>
+        <div className={buttonContainer}>
           <Button
             onClick={() => {
               taskNameIsEmpty(false);

@@ -11,11 +11,25 @@ import styles from "./styles";
 function AlertContainer(props) {
   const { emptyTaskName, taskNameIsEmpty, classes } = props;
 
+  const {
+    buttonContainer,
+    modalContainer,
+    modalContent,
+    alertContent,
+    alertName,
+    modal
+  } = classes;
+
   return (
     <Alert
       taskNameIsEmpty={taskNameIsEmpty}
+      buttonContainer={buttonContainer}
+      modalContainer={modalContainer}
       emptyTaskName={emptyTaskName}
-      classes={classes}
+      modalContent={modalContent}
+      alertContent={alertContent}
+      alertName={alertName}
+      modal={modal}
     />
   );
 }

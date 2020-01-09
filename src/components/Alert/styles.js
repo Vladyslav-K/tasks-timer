@@ -34,7 +34,7 @@ export default {
 
     color: "#CA0045"
   },
-  alertContant: {
+  alertContent: {
     opacity: 0.7
   }
 };
