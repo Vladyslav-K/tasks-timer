@@ -6,7 +6,7 @@ import Fab from "@material-ui/core/Fab";
 
 export default function Timer(props) {
   const {
-    setTaskNameAction,
+    setTaskName,
     verifyTaskName,
     timerStartTime,
     startTimer,
@@ -25,7 +25,7 @@ export default function Timer(props) {
         placeholder="Name of your task"
         className={taskInput}
         value={taskName || ""}
-        onChange={event => setTaskNameAction(event.target.value)}
+        onChange={event => setTaskName(event.target.value)}
       />
 
       <Fab className={timerFab}>{time}</Fab>

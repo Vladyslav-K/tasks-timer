@@ -2,10 +2,8 @@ const cyanogen = "#E8F6FF";
 const violet = "#4823C2";
 
 export default {
-  cyanogenRow: {
-    background: cyanogen
-  },
-  violetCell: {
+  tableRow: {
+    background: cyanogen,
     color: violet
   },
   noTasks: {

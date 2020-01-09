@@ -5,10 +5,10 @@ import { DateTime, Interval } from "luxon";
 import Timer from "./Timer";
 
 import {
-  setTaskNameAction,
-  startTimerAction,
-  stopTimerAction,
-  setTimeAction
+  setTaskName,
+  startTask,
+  stopTask,
+  setTime
 } from "../../store/Timer/actions";
 import { pushTaskInTasksList } from "../../store/Log/actions";
 import { openAlertWindow } from "../../store/Alert/actions";
@@ -24,20 +24,20 @@ class TimerContainer extends Component {
   }
 
   startTimerWhenPageReset = () => {
-    this.setTime();
+    this.setCurrentTime();
     this.timer();
   };
 
   timer = () => {
     setInterval(() => {
       return this.props.taskProps.timerStartTime
-        ? this.setTime()
-        : this.props.setTimeAction("00:00:00");
+        ? this.setCurrentTime()
+        : this.props.setTime("00:00:00");
     }, 1000);
   };
 
-  setTime = () => {
-    this.props.setTimeAction(
+  setCurrentTime = () => {
+    this.props.setTime(
       Interval.fromDateTimes(
         DateTime.fromISO(this.props.taskProps.timerStartTime),
         DateTime.local()
@@ -48,7 +48,7 @@ class TimerContainer extends Component {
   };
 
   startTimer = () => {
-    this.props.startTimerAction(DateTime.local().toISO());
+    this.props.startTask(DateTime.local().toISO());
   };
 
   verifyTaskName = () => {
@@ -58,9 +58,9 @@ class TimerContainer extends Component {
   };
 
   stopTimer = () => {
-    const { taskProps, stopTimerAction, pushTaskInTasksList } = this.props;
+    const { taskProps, stopTask, pushTaskInTasksList } = this.props;
 
-    stopTimerAction();
+    stopTask();
 
     pushTaskInTasksList({
       ...taskProps,
@@ -83,16 +83,17 @@ class TimerContainer extends Component {
     const {
       time,
       classes,
-      taskProps: { timerStartTime, taskName },
-      setTaskNameAction
+      setTaskName,
+
+      taskProps: { timerStartTime, taskName }
     } = this.props;
 
     return (
       <Timer
-        setTaskNameAction={setTaskNameAction}
         verifyTaskName={this.verifyTaskName}
-        timerStartTime={timerStartTime}
         startTimer={this.startTimer}
+        setTaskName={setTaskName}
+        timerStartTime={timerStartTime}
         taskName={taskName}
         time={time}
         classes={classes}
@@ -112,10 +113,10 @@ const mapStateToProps = ({ timer, tasksLog }) => {
 
 const mapDispatchToProps = {
   pushTaskInTasksList,
-  setTaskNameAction,
-  startTimerAction,
-  stopTimerAction,
-  setTimeAction,
+  setTaskName,
+  startTask,
+  stopTask,
+  setTime,
 
   openAlertWindow
 };

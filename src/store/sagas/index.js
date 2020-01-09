@@ -1,5 +1,5 @@
 import { all, call, select, delay, put, takeLatest } from "redux-saga/effects";
-import { syncTaskProps, stopTimerAction } from "../Timer/actions";
+import { syncTaskProps, stopTask } from "../Timer/actions";
 import { syncTasksList } from "../Log/actions";
 
 export function* syncStateAndStorage() {
@@ -30,7 +30,7 @@ export function* setStateFromStorage() {
   const taskProps = yield call(() => {
     return (
       JSON.parse(localStorage.getItem("startTimeAndTaskName")) ||
-      stopTimerAction()
+      stopTask()
     );
   });
 

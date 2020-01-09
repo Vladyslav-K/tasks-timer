@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 
 export default function Log(props) {
   const { deleteCurrentTask, tasksList, classes } = props;
-  const { cyanogenRow, violetCell, noTasks, tasksButton } = classes;
+  const { tableRow, noTasks, tasksButton } = classes;
 
   return (
     <Table>
@@ -28,18 +28,18 @@ export default function Log(props) {
       <TableBody>
         {tasksList.length > 0 ? (
           tasksList.map(task => (
-            <TableRow key={task.id} className={cyanogenRow}>
-              <TableCell className={violetCell} component="th" scope="row">
+            <TableRow key={task.id} className={tableRow}>
+              <TableCell component="th" scope="row">
                 {task.id}
               </TableCell>
-              <TableCell className={violetCell}>{task.taskName}</TableCell>
-              <TableCell className={violetCell}>
-                {DateTime.fromISO(task.timerStartTime).toFormat("HH:mm:ss")}
+              <TableCell>{task.taskName}</TableCell>
+              <TableCell>
+                {DateTime.fromISO(task.timerStartTime).toFormat("hh:mm:ss")}
               </TableCell>
-              <TableCell className={violetCell}>
-                {DateTime.fromISO(task.timerStopTime).toFormat("HH:mm:ss")}
+              <TableCell>
+                {DateTime.fromISO(task.timerStopTime).toFormat("hh:mm:ss")}
               </TableCell>
-              <TableCell className={violetCell}>
+              <TableCell>
                 {Interval.fromDateTimes(
                   DateTime.fromISO(task.timerStartTime),
                   DateTime.fromISO(task.timerStopTime)
@@ -47,7 +47,7 @@ export default function Log(props) {
                   .toDuration()
                   .toFormat("hh:mm:ss")}
               </TableCell>
-              <TableCell className={violetCell}>
+              <TableCell>
                 <Button
                   className={tasksButton}
                   variant="contained"
@@ -69,7 +69,7 @@ export default function Log(props) {
             </TableRow>
           ))
         ) : (
-          <TableRow className={cyanogenRow}>
+          <TableRow className={tableRow}>
             <TableCell className={noTasks} colSpan={7}>
               No tasks to show
             </TableCell>
