@@ -1,2 +1,2 @@
-import Chart from "./Chart";
-export default Chart;
+import ChartContainer from "./ChartContainer";
+export default ChartContainer;
