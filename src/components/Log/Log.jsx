@@ -1,5 +1,6 @@
 import React from "react";
 import { DateTime, Interval } from "luxon";
+import { Link } from "react-router-dom";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,7 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
 export default function Log(props) {
-  const { deleteCurrentTask, tasksList, classes } = props;
+  const { deleteCurrentTask, saveCurrentTask, tasksList, classes } = props;
   const { tableRow, noTasks, tasksButton } = classes;
 
   return (
@@ -34,10 +35,10 @@ export default function Log(props) {
               </TableCell>
               <TableCell>{task.taskName}</TableCell>
               <TableCell>
-                {DateTime.fromISO(task.timerStartTime).toFormat("hh:mm:ss")}
+                {DateTime.fromISO(task.timerStartTime).toFormat("HH:mm:ss")}
               </TableCell>
               <TableCell>
-                {DateTime.fromISO(task.timerStopTime).toFormat("hh:mm:ss")}
+                {DateTime.fromISO(task.timerStopTime).toFormat("HH:mm:ss")}
               </TableCell>
               <TableCell>
                 {Interval.fromDateTimes(
@@ -52,6 +53,9 @@ export default function Log(props) {
                   className={tasksButton}
                   variant="contained"
                   size="small"
+                  onClick={() => saveCurrentTask(task)}
+                  component={Link}
+                  to={`/tasks/${task.id}`}
                 >
                   Info
                 </Button>

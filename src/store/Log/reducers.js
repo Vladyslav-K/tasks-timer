@@ -1,25 +1,33 @@
 import {
-  SYNC_TASKS_LIST,
   PUSH_TASK_IN_TASKS_LIST,
+  SYNC_TASKS_LIST,
+  SAVE_CURRENT_TASK,
   DELETE_TASK
 } from "./actions";
 
 const initialState = {
-  tasksList: []
+  tasksList: [],
+  task: []
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case PUSH_TASK_IN_TASKS_LIST:
+      return {
+        ...state,
+        tasksList: [...state.tasksList, action.payload]
+      };
+
     case SYNC_TASKS_LIST:
       return {
         ...state,
         tasksList: [...state.tasksList, ...action.payload]
       };
 
-    case PUSH_TASK_IN_TASKS_LIST:
+    case SAVE_CURRENT_TASK:
       return {
         ...state,
-        tasksList: [...state.tasksList, action.payload]
+        task: action.payload
       };
 
     case DELETE_TASK: {
