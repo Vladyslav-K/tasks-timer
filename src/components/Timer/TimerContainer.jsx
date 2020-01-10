@@ -31,24 +31,19 @@ class TimerContainer extends Component {
   };
 
   timer = () => {
-    const {
-      setTime,
-      taskProps: { timerStartTime }
-    } = this.props;
-
     setInterval(() => {
-      return timerStartTime ? this.setCurrentTime() : setTime("00:00:00");
+      return this.props.taskProps.timerStartTime
+        ? this.setCurrentTime()
+        : this.props.setTime("00:00:00");
     }, 1000);
   };
 
   setCurrentTime = () => {
-    const {
-      setTime,
-      taskProps: { timerStartTime }
-    } = this.props;
-
-    setTime(
-      Interval.fromDateTimes(DateTime.fromISO(timerStartTime), DateTime.local())
+    this.props.setTime(
+      Interval.fromDateTimes(
+        DateTime.fromISO(this.props.taskProps.timerStartTime),
+        DateTime.local()
+      )
         .toDuration()
         .toFormat("hh:mm:ss")
     );
