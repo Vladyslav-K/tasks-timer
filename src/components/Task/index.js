@@ -1,2 +1,2 @@
-import Task from "./Task";
-export default Task;
+import TaskContainer from "./TaskContainer";
+export default TaskContainer;

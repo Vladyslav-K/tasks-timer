@@ -36,7 +36,7 @@ function Chart(props) {
           <Legend />
           <Bar
             dataKey="tasksTimeInThisHour"
-            name="Minutes in this hour"
+            name="Minutes in this hours"
             barSize={20}
             fill="#4823C2"
           />
