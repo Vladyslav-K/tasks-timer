@@ -3,6 +3,8 @@ export const SYNC_TASKS_LIST = "SYNC_STATE_FROM_STORAGE";
 export const SAVE_CURRENT_TASK = "SAVE_CURRENT_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 
+export const GENERATE_RANDOM_TASKS = "GENERATE_RANDOM_TASKS";
+
 export const pushTaskInTasksList = payload => {
   return { type: PUSH_TASK_IN_TASKS_LIST, payload };
 };
@@ -17,4 +19,8 @@ export const saveCurrentTask = payload => {
 
 export const deleteTask = payload => {
   return { type: DELETE_TASK, payload };
+};
+
+export const generateRandomTasks = payload => {
+  return { type: GENERATE_RANDOM_TASKS, payload };
 };
