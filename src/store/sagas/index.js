@@ -15,6 +15,7 @@ export function* syncStateAndStorage() {
 
   yield call(() => {
     localStorage.setItem("tasksList", JSON.stringify(tasksList));
+
     localStorage.setItem(
       "startTimeAndTaskName",
       JSON.stringify({ timerStartTime, taskName })
@@ -29,8 +30,7 @@ export function* setStateFromStorage() {
 
   const taskProps = yield call(() => {
     return (
-      JSON.parse(localStorage.getItem("startTimeAndTaskName")) ||
-      stopTask()
+      JSON.parse(localStorage.getItem("startTimeAndTaskName")) || stopTask()
     );
   });
 

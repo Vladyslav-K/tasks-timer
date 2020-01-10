@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link, Route, withRouter } from "react-router-dom";
+import React from "react";
+import { Link, Route } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,66 +14,45 @@ import Log from "../Log";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-class TasksTimer extends Component {
-  constructor(props) {
-    super(props);
+function TasksTimer(props) {
+  const { location, classes } = props;
+  const { tasksTimerContainer, tabsContainer } = classes;
 
-    const { location } = props;
+  const currentTab = (location.pathname === "/chart" && "Chart") || "Log";
 
-    const currentTab = (location.pathname === "/chart" && "Chart") || "Log";
-
-    this.state = {
-      currentTab
-    };
-  }
-
-  onChangeTab = (event, value) => {
-    this.setState({
-      currentTab: value
-    });
-  };
-
-  render() {
-    const { currentTab } = this.state;
-    const { tasksTimerContainer, tabsContainer } = this.props.classes;
-    return (
-      <div className={tasksTimerContainer}>
-        <Grid container justify="center">
-          <Grid item xs={12} lg={10}>
-            <Alert />
-            <Timer />
-          </Grid>
-          <Grid item xs={12} lg={10}>
-            <section>
-              <AppBar position="relative" className={tabsContainer}>
-                <Tabs
-                  variant="fullWidth"
-                  onChange={this.onChangeTab}
-                  value={currentTab}
-                >
-                  <Tab
-                    value="Log"
-                    label="Tasks log"
-                    component={Link}
-                    to={"/tasks"}
-                  />
-                  <Tab
-                    value="Chart"
-                    label="Tasks chart"
-                    component={Link}
-                    to={"/chart"}
-                  />
-                </Tabs>
-              </AppBar>
-
-              <Route path="/tasks" exact component={Log} />
-              <Route path="/chart" exact component={Chart} />
-            </section>
-          </Grid>
+  return (
+    <div className={tasksTimerContainer}>
+      <Grid container justify="center">
+        <Grid item xs={12} lg={10}>
+          <Alert />
+          <Timer />
         </Grid>
-      </div>
-    );
-  }
+        <Grid item xs={12} lg={10}>
+          <section>
+            <AppBar position="relative" className={tabsContainer}>
+              <Tabs variant="fullWidth" value={currentTab}>
+                <Tab
+                  value="Log"
+                  label="Tasks log"
+                  component={Link}
+                  to={"/tasks"}
+                />
+                <Tab
+                  value="Chart"
+                  label="Tasks chart"
+                  component={Link}
+                  to={"/chart"}
+                />
+              </Tabs>
+            </AppBar>
+
+            <Route path="/tasks" exact component={Log} />
+            <Route path="/chart" exact component={Chart} />
+          </section>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 
-export default withRouter(withStyles(styles)(TasksTimer));
+export default withStyles(styles)(TasksTimer);

@@ -6,15 +6,13 @@ const createTaskChartData = task => {
   const findStartTime = () => {
     const taskStartDateFromISO = DateTime.fromISO(task.timerStartTime);
     const { hour, minute, second } = taskStartDateFromISO;
-    const taskStartTime = { hour, minute, second };
-    return taskStartTime;
+    return { hour, minute, second };
   };
 
   const findStopTime = () => {
     const taskStopDateFromISO = DateTime.fromISO(task.timerStopTime);
     const { hour, minute, second } = taskStopDateFromISO;
-    const taskStopTime = { hour, minute, second };
-    return taskStopTime;
+    return { hour, minute, second };
   };
 
   const startTime = findStartTime();
@@ -61,7 +59,6 @@ const createTaskChartData = task => {
     });
   }
 
-  console.log(chartData);
   return chartData;
 };
 

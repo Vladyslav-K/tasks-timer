@@ -2,8 +2,8 @@ import React from "react";
 import {
   HashRouter as Router,
   Redirect,
-  Route,
-  Switch
+  Switch,
+  Route
 } from "react-router-dom";
 
 import PageNotFound from "../PageNotFound/PageNotFound";

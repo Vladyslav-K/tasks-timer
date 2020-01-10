@@ -19,10 +19,10 @@ export default function Alert(props) {
 
   return (
     <Modal
-      aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
-      open={taskNameIsEmpty}
+      aria-labelledby="simple-modal-title"
       className={modalContainer}
+      open={taskNameIsEmpty}
     >
       <div className={modal}>
         <Grid container className={modalContent}>
@@ -30,9 +30,9 @@ export default function Alert(props) {
             Empty task name
           </Typography>
           <Typography
-            variant="subtitle1"
             id="simple-modal-description"
             className={alertContent}
+            variant="subtitle1"
           >
             You are trying close your task without name, enter the title and try
             again!

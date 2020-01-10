@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Alert from "./Alert";
-
 import { openAlertWindow } from "../../store/Alert/actions";
+
+import Alert from "./Alert";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";

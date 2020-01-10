@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { DateTime, Interval } from "luxon";
 
-import Timer from "./Timer";
-
 import {
   setTaskName,
   startTask,
   stopTask,
   setTime
 } from "../../store/Timer/actions";
+
 import { pushTaskInTasksList } from "../../store/Log/actions";
+
 import { openAlertWindow } from "../../store/Alert/actions";
+
+import Timer from "./Timer";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
@@ -29,19 +31,24 @@ class TimerContainer extends Component {
   };
 
   timer = () => {
+    const {
+      setTime,
+      taskProps: { timerStartTime }
+    } = this.props;
+
     setInterval(() => {
-      return this.props.taskProps.timerStartTime
-        ? this.setCurrentTime()
-        : this.props.setTime("00:00:00");
+      return timerStartTime ? this.setCurrentTime() : setTime("00:00:00");
     }, 1000);
   };
 
   setCurrentTime = () => {
-    this.props.setTime(
-      Interval.fromDateTimes(
-        DateTime.fromISO(this.props.taskProps.timerStartTime),
-        DateTime.local()
-      )
+    const {
+      setTime,
+      taskProps: { timerStartTime }
+    } = this.props;
+
+    setTime(
+      Interval.fromDateTimes(DateTime.fromISO(timerStartTime), DateTime.local())
         .toDuration()
         .toFormat("hh:mm:ss")
     );

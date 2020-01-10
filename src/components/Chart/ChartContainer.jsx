@@ -1,21 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
+import { DateTime } from "luxon";
 
 import createChartData from "./createChartData";
-import { generateRandomTasks } from "../../store/Log/actions";
+import { setTasksListValue } from "../../store/Log/actions";
 
 import Chart from "./Chart";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
-import { DateTime } from "luxon";
 
 const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min + 1);
 };
 
 function ChartContainer(props) {
-  const { generateRandomTasks, tasksList, classes } = props;
+  const { setTasksListValue, tasksList, classes } = props;
 
   const getRandomTasks = () => {
     const data = [];
@@ -44,7 +44,7 @@ function ChartContainer(props) {
       timerStartTime = timerStopTime;
     }
 
-    generateRandomTasks(data);
+    setTasksListValue(data);
   };
 
   const data = createChartData(tasksList);
@@ -59,7 +59,7 @@ const mapStateToProps = ({ tasksLog }) => {
   };
 };
 
-const mapDispatchToProps = { generateRandomTasks };
+const mapDispatchToProps = { setTasksListValue };
 
 export default connect(
   mapStateToProps,

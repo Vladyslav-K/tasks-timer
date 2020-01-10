@@ -6,10 +6,11 @@ import Fab from "@material-ui/core/Fab";
 
 export default function Timer(props) {
   const {
-    setTaskName,
     verifyTaskName,
-    timerStartTime,
+    setTaskName,
     startTimer,
+
+    timerStartTime,
     taskName,
     time,
 

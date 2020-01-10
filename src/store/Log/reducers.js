@@ -1,9 +1,8 @@
 import {
   PUSH_TASK_IN_TASKS_LIST,
+  SET_TASKS_LIST_VALUE,
   SYNC_TASKS_LIST,
-  SAVE_CURRENT_TASK,
-  DELETE_TASK,
-  GENERATE_RANDOM_TASKS
+  SAVE_CURRENT_TASK
 } from "./actions";
 
 const initialState = {
@@ -19,6 +18,12 @@ export default function reducer(state = initialState, action) {
         tasksList: [...state.tasksList, action.payload]
       };
 
+    case SET_TASKS_LIST_VALUE:
+      return {
+        ...state,
+        tasksList: action.payload
+      };
+
     case SYNC_TASKS_LIST:
       return {
         ...state,
@@ -29,18 +34,6 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         task: action.payload
-      };
-
-    case DELETE_TASK:
-      return {
-        ...state,
-        tasksList: action.payload
-      };
-
-    case GENERATE_RANDOM_TASKS:
-      return {
-        ...state,
-        tasksList: action.payload
       };
 
     default:
