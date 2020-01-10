@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import Task from "./Task";
 import TaskChart from "./TaskChart";
@@ -16,6 +17,10 @@ function TaskContainer(props) {
   const { tasksList, match, classes } = props;
 
   const task = tasksList.find(task => task.id === Number(match.params.id));
+
+  if (!task) {
+    return <Redirect to={"/404"} />;
+  }
 
   const dataForChart = createTaskChartData(task);
 

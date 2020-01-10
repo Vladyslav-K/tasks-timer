@@ -25,7 +25,7 @@ export default {
     paddingRight: "1rem",
     paddingBottom: ".5rem",
 
-    "& button": {
+    "& span": {
       color: "#00BCD3"
     }
   },

@@ -55,7 +55,7 @@ class TasksTimer extends Component {
                     value="Log"
                     label="Tasks log"
                     component={Link}
-                    to={"/"}
+                    to={"/tasks"}
                   />
                   <Tab
                     value="Chart"
@@ -66,7 +66,7 @@ class TasksTimer extends Component {
                 </Tabs>
               </AppBar>
 
-              <Route path="/" exact component={Log} />
+              <Route path="/tasks" exact component={Log} />
               <Route path="/chart" exact component={Chart} />
             </section>
           </Grid>
