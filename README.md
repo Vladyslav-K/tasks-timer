@@ -2,7 +2,7 @@
 
 ## Track how much time you spend on tasks! 
 
-### [Link on Github Page](https://vladyslav-k.github.io/react-interactive-table/)
+### [Link on Github Page](https://vladyslav-k.github.io/tasks-timer)
 ___
 
 ### Install dependencies:
