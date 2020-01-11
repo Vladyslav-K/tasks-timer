@@ -60,19 +60,19 @@ describe("Testing the function of grouping tasks according to a schedule by the 
       checkTaskInExpectedHour(data, 8, 45);
     });
 
-    it("At 9 o'clock the task took 30 minutes", () => {
+    it("At 9 o'clock the task took 60 minutes", () => {
       checkTaskInExpectedHour(data, 9, 60);
     });
 
-    it("At 10 o'clock the task took 40 minutes", () => {
+    it("At 10 o'clock the task took 60 minutes", () => {
       checkTaskInExpectedHour(data, 10, 60);
     });
 
-    it("At 11 o'clock the task took 30 minutes", () => {
+    it("At 11 o'clock the task took 60 minutes", () => {
       checkTaskInExpectedHour(data, 11, 60);
     });
 
-    it("At 12 o'clock the task took 30 minutes", () => {
+    it("At 12 o'clock the task took 25 minutes", () => {
       checkTaskInExpectedHour(data, 12, 25);
     });
   });
@@ -93,11 +93,11 @@ describe("Testing the function of grouping tasks according to a schedule by the 
       checkTaskInExpectedHour(data, 23, 0);
     });
 
-    it("At 0 o'clock of the current day, the task took 30 minutes", () => {
+    it("At 0 o'clock of the current day, the task took 60 minutes", () => {
       checkTaskInExpectedHour(data, 0, 60);
     });
 
-    it("At 1 o'clock of the current day, the task took 30 minutes", () => {
+    it("At 1 o'clock of the current day, the task took 20 minutes", () => {
       checkTaskInExpectedHour(data, 1, 20);
     });
   });
