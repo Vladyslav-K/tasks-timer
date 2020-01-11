@@ -20,8 +20,8 @@ export default function Chart(props) {
 
   return (
     <div>
-      <ResponsiveContainer id="container" width="95%" height={300}>
-        <BarChart data={chartData} margin={{ top: 20 }}>
+      <ResponsiveContainer id="container" width="100%" height={300}>
+        <BarChart data={chartData} margin={{ top: 20, left: -25 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="hour" />
           <YAxis dataKey="minutes" />
