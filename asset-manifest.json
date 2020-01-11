@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/tasks-timer/static/js/main.1bd348d1.chunk.js",
-    "main.js.map": "/tasks-timer/static/js/main.1bd348d1.chunk.js.map",
+    "main.js": "/tasks-timer/static/js/main.d17479bf.chunk.js",
+    "main.js.map": "/tasks-timer/static/js/main.d17479bf.chunk.js.map",
     "runtime-main.js": "/tasks-timer/static/js/runtime-main.6d74352b.js",
     "runtime-main.js.map": "/tasks-timer/static/js/runtime-main.6d74352b.js.map",
     "static/js/2.5410272c.chunk.js": "/tasks-timer/static/js/2.5410272c.chunk.js",
     "static/js/2.5410272c.chunk.js.map": "/tasks-timer/static/js/2.5410272c.chunk.js.map",
     "index.html": "/tasks-timer/index.html",
-    "precache-manifest.97badee2e453e3c8843f0f7771f029b9.js": "/tasks-timer/precache-manifest.97badee2e453e3c8843f0f7771f029b9.js",
+    "precache-manifest.9763ee4773740c3a97c4af5050868bdd.js": "/tasks-timer/precache-manifest.9763ee4773740c3a97c4af5050868bdd.js",
     "service-worker.js": "/tasks-timer/service-worker.js",
     "static/js/2.5410272c.chunk.js.LICENSE": "/tasks-timer/static/js/2.5410272c.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.6d74352b.js",
     "static/js/2.5410272c.chunk.js",
-    "static/js/main.1bd348d1.chunk.js"
+    "static/js/main.d17479bf.chunk.js"
   ]
 }
