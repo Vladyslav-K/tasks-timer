@@ -10,7 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
 export default function Log(props) {
-  const { deleteCurrentTask, saveCurrentTask, tasksList, classes } = props;
+  const { deleteCurrentTask, tasksList, classes } = props;
   const { tableRow, noTasks, tasksButton } = classes;
 
   return (
@@ -53,7 +53,6 @@ export default function Log(props) {
                   className={tasksButton}
                   variant="contained"
                   size="small"
-                  onClick={() => saveCurrentTask(task)}
                   component={Link}
                   to={`/tasks/${task.id}`}
                 >

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { saveCurrentTask, setTasksListValue } from "../../store/Log/actions";
+import { setTasksListValue } from "../../store/Log/actions";
 
 import Log from "./Log";
 
@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 function LogContainer(props) {
-  const { saveCurrentTask, setTasksListValue, tasksList, classes } = props;
+  const { setTasksListValue, tasksList, classes } = props;
 
   const deleteCurrentTask = id => {
     const tasksListWithoutCurrentTask = tasksList.filter(
@@ -22,7 +22,6 @@ function LogContainer(props) {
   return (
     <Log
       deleteCurrentTask={deleteCurrentTask}
-      saveCurrentTask={saveCurrentTask}
       tasksList={tasksList}
       classes={classes}
     />
@@ -35,7 +34,7 @@ const mapStateToProps = ({ tasksLog }) => {
   };
 };
 
-const mapDispatchToProps = { saveCurrentTask, setTasksListValue };
+const mapDispatchToProps = { setTasksListValue };
 
 export default connect(
   mapStateToProps,

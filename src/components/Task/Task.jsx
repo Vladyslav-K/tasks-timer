@@ -38,7 +38,7 @@ export default function Task(props) {
         </Typography>
       </CardContent>
       <CardActions className={buttonContainer}>
-        <Button className={button} size="small" component={Link} to="/">
+        <Button className={button} size="small" component={Link} to="/tasks">
           Back
         </Button>
       </CardActions>

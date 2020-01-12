@@ -8,8 +8,8 @@ export const startTask = payload => {
   return { type: START_TASK, payload };
 };
 
-export const stopTask = payload => {
-  return { type: STOP_TASK, payload };
+export const stopTask = () => {
+  return { type: STOP_TASK };
 };
 
 export const setTime = payload => {

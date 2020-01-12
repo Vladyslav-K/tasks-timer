@@ -6,8 +6,6 @@ import Task from "./Task";
 import TaskChart from "./TaskChart";
 import createTaskChartData from "./createTaskChartData";
 
-import { saveCurrentTask } from "../../store/Log/actions";
-
 import Grid from "@material-ui/core/Grid";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -34,14 +32,8 @@ function TaskContainer(props) {
 
 const mapStateToProps = ({ tasksLog }) => {
   return {
-    tasksList: tasksLog.tasksList,
-    task: tasksLog.task
+    tasksList: tasksLog.tasksList
   };
 };
 
-const mapDispatchToProps = { saveCurrentTask };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(TaskContainer));
+export default connect(mapStateToProps)(withStyles(styles)(TaskContainer));

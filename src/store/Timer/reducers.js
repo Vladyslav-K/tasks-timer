@@ -32,6 +32,7 @@ export default function reducer(state = initialState, action) {
     case STOP_TASK:
       return {
         ...state,
+        time: initialState.time,
         taskProps: initialState.taskProps
       };
 
