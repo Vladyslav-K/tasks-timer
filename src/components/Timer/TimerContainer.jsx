@@ -19,34 +19,36 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 class TimerContainer extends Component {
+  intervalID = 0;
+
   componentDidMount() {
-    this.props.taskProps.timerStartTime
-      ? this.startTimerWhenPageReset()
-      : this.timer();
+    if (this.props.taskProps.timerStartTime) {
+      this.timer();
+    }
+
+    this.intervalID = setInterval(this.timer, 1000);
   }
 
-  startTimerWhenPageReset = () => {
-    this.setCurrentTime();
-    this.timer();
-  };
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
 
   timer = () => {
-    setInterval(() => {
-      return this.props.taskProps.timerStartTime
-        ? this.setCurrentTime()
-        : this.props.setTime("00:00:00");
-    }, 1000);
-  };
+    const {
+      taskProps: { timerStartTime },
+      setTime
+    } = this.props;
 
-  setCurrentTime = () => {
-    this.props.setTime(
-      Interval.fromDateTimes(
-        DateTime.fromISO(this.props.taskProps.timerStartTime),
-        DateTime.local()
-      )
-        .toDuration()
-        .toFormat("hh:mm:ss")
-    );
+    timerStartTime
+      ? setTime(
+          Interval.fromDateTimes(
+            DateTime.fromISO(this.props.taskProps.timerStartTime),
+            DateTime.local()
+          )
+            .toDuration()
+            .toFormat("hh:mm:ss")
+        )
+      : setTime("00:00:00");
   };
 
   startTimer = () => {
@@ -69,8 +71,6 @@ class TimerContainer extends Component {
       id: this.createTaskId(),
       timerStopTime: DateTime.local().toISO()
     });
-
-    clearInterval(this.timer);
   };
 
   createTaskId = () => {
