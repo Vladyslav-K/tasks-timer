@@ -1,3 +1,6 @@
+const blue = "#00BCD3";
+const red = "#CA0045";
+
 export default {
   modalContainer: {
     display: "flex",
@@ -26,13 +29,13 @@ export default {
     paddingBottom: ".5rem",
 
     "& span": {
-      color: "#00BCD3"
+      color: blue
     }
   },
   alertName: {
     paddingBottom: "1rem",
 
-    color: "#CA0045"
+    color: red
   },
   alertContent: {
     opacity: 0.7

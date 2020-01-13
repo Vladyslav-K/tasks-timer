@@ -18,7 +18,7 @@ function TasksTimer(props) {
   const { location, classes } = props;
   const { tasksTimerContainer, tabsContainer } = classes;
 
-  const currentTab = (location.pathname === "/chart" && "Chart") || "Log";
+  const currentTab = location.pathname === "/chart" ? "Chart" : "Log";
 
   return (
     <div className={tasksTimerContainer}>
