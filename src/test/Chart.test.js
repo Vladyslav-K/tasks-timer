@@ -79,8 +79,10 @@ describe("Testing the function of grouping tasks according to a schedule by the 
 
   describe("4. Test of the previous day at interval of 22:40:50 to 01:20:33:", () => {
     const testData = createTestData(
-      { day: 10, hour: 22, minute: 40, second: 50 },
-      { day: 11, hour: 1, minute: 20, second: 33 }
+      DateTime.fromObject({ hour: 22, minute: 40, second: 50 })
+        .minus({ day: 1 })
+        .toObject(),
+      { hour: 1, minute: 20, second: 33 }
     );
 
     const data = createChartData(testData);
