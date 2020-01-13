@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import Task from "./CurrentTask";
-import TaskChart from "./CurrentTaskChart";
+import CurrentTask from "./CurrentTask";
+import CurrentTaskChart from "./CurrentTaskChart";
 import createTaskChartData from "./createTaskChartData";
 
 import Grid from "@material-ui/core/Grid";
@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-function TaskContainer(props) {
+function CurrentTaskContainer(props) {
   const { tasksList, match, classes } = props;
 
   const task = tasksList.find(task => task.id === Number(match.params.id));
@@ -24,16 +24,18 @@ function TaskContainer(props) {
 
   return (
     <Grid container alignItems="center" direction="column">
-      <Task task={task} classes={classes} />
-      <TaskChart dataForChart={dataForChart} />
+      <CurrentTask task={task} classes={classes} />
+      <CurrentTaskChart dataForChart={dataForChart} />
     </Grid>
   );
 }
 
-const mapStateToProps = ({ tasksLog }) => {
+const mapStateToProps = ({ timer: { tasksList } }) => {
   return {
-    tasksList: tasksLog.tasksList
+    tasksList
   };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(TaskContainer));
+export default connect(mapStateToProps)(
+  withStyles(styles)(CurrentTaskContainer)
+);

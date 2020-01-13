@@ -1,16 +1,14 @@
 import { all, call, select, delay, put, takeLatest } from "redux-saga/effects";
-import { syncTaskProps, stopTask } from "../Timer/actions";
-import { syncTasksList } from "../Log/actions";
+import { syncTasksList, syncTaskProps, stopTask } from "../Timer/actions";
 
 export function* syncStateAndStorage() {
   yield delay(300);
 
   const {
     timer: {
-      taskProps: { timerStartTime, taskName }
-    },
-
-    tasksLog: { tasksList }
+      taskProps: { timerStartTime, taskName },
+      tasksList
+    }
   } = yield select();
 
   yield call(() => {

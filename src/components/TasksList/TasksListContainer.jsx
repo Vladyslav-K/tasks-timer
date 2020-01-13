@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setTasksListValue } from "../../store/Log/actions";
+import { setTasksListValue } from "../../store/Timer/actions";
 
 import TasksList from "./TasksList";
 
@@ -28,9 +28,9 @@ function LogContainer(props) {
   );
 }
 
-const mapStateToProps = ({ tasksLog }) => {
+const mapStateToProps = ({ timer: { tasksList } }) => {
   return {
-    tasksList: tasksLog.tasksList
+    tasksList
   };
 };
 

@@ -3,11 +3,16 @@ import {
   STOP_TASK,
   SET_TIME,
   SET_TASK_NAME,
-  SYNC_TASK_PROPS
+  SYNC_TASK_PROPS,
+  PUSH_TASK_IN_TASKS_LIST,
+  SET_TASKS_LIST_VALUE,
+  SYNC_TASKS_LIST
 } from "./actions";
 
 const initialState = {
   time: "00:00:00",
+
+  tasksList: [],
 
   taskProps: {
     id: null,
@@ -58,6 +63,24 @@ export default function reducer(state = initialState, action) {
           ...state.taskProps,
           ...action.payload
         }
+      };
+
+    case PUSH_TASK_IN_TASKS_LIST:
+      return {
+        ...state,
+        tasksList: [...state.tasksList, action.payload]
+      };
+
+    case SET_TASKS_LIST_VALUE:
+      return {
+        ...state,
+        tasksList: action.payload
+      };
+
+    case SYNC_TASKS_LIST:
+      return {
+        ...state,
+        tasksList: [...state.tasksList, ...action.payload]
       };
 
     default:

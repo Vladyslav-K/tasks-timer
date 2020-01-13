@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import { DateTime, Interval } from "luxon";
 
 import {
+  pushTaskInTasksList,
   setTaskName,
   startTask,
   stopTask,
   setTime
 } from "../../store/Timer/actions";
-
-import { pushTaskInTasksList } from "../../store/Log/actions";
 
 import { openAlertWindow } from "../../store/Alert/actions";
 
@@ -104,12 +103,11 @@ class TimerContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ timer, tasksLog }) => {
+const mapStateToProps = ({ timer: { taskProps, tasksList, time } }) => {
   return {
-    time: timer.time,
-    taskProps: timer.taskProps,
-
-    tasksList: tasksLog.tasksList
+    time,
+    taskProps,
+    tasksList
   };
 };
 
