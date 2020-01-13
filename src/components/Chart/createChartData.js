@@ -17,7 +17,7 @@ const createChartData = tasksList => {
       )
     );
 
-    let tasksMinutesInThisHour = 0;
+    let tasksMinutesInThisHour;
 
     if (tasksTimeInThisHour) {
       tasksMinutesInThisHour = tasksTimeInThisHour.reduce(
