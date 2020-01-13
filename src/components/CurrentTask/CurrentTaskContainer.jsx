@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import Task from "./Task";
-import TaskChart from "./TaskChart";
+import Task from "./CurrentTask";
+import TaskChart from "./CurrentTaskChart";
 import createTaskChartData from "./createTaskChartData";
 
 import Grid from "@material-ui/core/Grid";

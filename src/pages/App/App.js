@@ -6,9 +6,9 @@ import {
   Route
 } from "react-router-dom";
 
-import PageNotFound from "../PageNotFound/PageNotFound";
+import PageNotFound from "../PageNotFound";
 import TasksTimer from "../TasksTimer";
-import Task from "../Task";
+import Task from "../../components/CurrentTask";
 
 function App() {
   return (

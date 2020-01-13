@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 import createChartData from "./createChartData";
 import { setTasksListValue } from "../../store/Log/actions";
 
-import Chart from "./Chart";
+import TasksChart from "./TasksChart";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
@@ -50,7 +50,7 @@ function ChartContainer(props) {
   const data = createChartData(tasksList);
 
   return (
-    <Chart getRandomTasks={getRandomTasks} chartData={data} classes={classes} />
+    <TasksChart getRandomTasks={getRandomTasks} chartData={data} classes={classes} />
   );
 }
 const mapStateToProps = ({ tasksLog }) => {

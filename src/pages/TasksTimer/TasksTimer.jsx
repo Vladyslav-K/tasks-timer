@@ -6,10 +6,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-import Timer from "../Timer";
-import Alert from "../Alert";
-import Chart from "../Chart";
-import Log from "../Log";
+import Timer from "../../components/Timer";
+import Alert from "../../components/Alert";
+import TasksChart from "../../components/TasksChart";
+import TasksList from "../../components/TasksList";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
@@ -46,8 +46,8 @@ function TasksTimer(props) {
               </Tabs>
             </AppBar>
 
-            <Route path="/tasks" exact component={Log} />
-            <Route path="/chart" exact component={Chart} />
+            <Route path="/tasks" exact component={TasksList} />
+            <Route path="/chart" exact component={TasksChart} />
           </section>
         </Grid>
       </Grid>

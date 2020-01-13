@@ -7,7 +7,7 @@ import reducers from "./store/reducers";
 import { Provider } from "react-redux";
 import rootSaga from "./store/sagas";
 
-import App from "./components/App";
+import App from "./pages/App";
 import * as serviceWorker from "./serviceWorker";
 
 const sagaMiddleware = createSagaMiddleware();

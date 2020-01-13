@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { setTasksListValue } from "../../store/Log/actions";
 
-import Log from "./Log";
+import TasksList from "./TasksList";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
@@ -20,7 +20,7 @@ function LogContainer(props) {
   };
 
   return (
-    <Log
+    <TasksList
       deleteCurrentTask={deleteCurrentTask}
       tasksList={tasksList}
       classes={classes}
