@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
 import { setTasksListValue } from "../../domain/actions";
 
@@ -37,7 +38,7 @@ const mapStateToProps = ({ tasksList }) => {
 
 const mapDispatchToProps = { setTasksListValue };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(TasksListContainer));
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles)
+)(TasksListContainer);

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { DateTime } from "luxon";
 
 import createChartData from "./createChartData";
@@ -68,7 +69,7 @@ const mapStateToProps = ({ tasksList }) => {
 
 const mapDispatchToProps = { setTasksListValue };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(ChartContainer));
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles)
+)(ChartContainer);

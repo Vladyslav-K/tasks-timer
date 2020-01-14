@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
 import CurrentTask from "./CurrentTask";
 import CurrentTaskChart from "./CurrentTaskChart";
@@ -38,6 +39,7 @@ const mapStateToProps = ({ tasksList }) => {
   };
 };
 
-export default connect(mapStateToProps)(
-  withStyles(styles)(CurrentTaskContainer)
-);
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles)
+)(CurrentTaskContainer);

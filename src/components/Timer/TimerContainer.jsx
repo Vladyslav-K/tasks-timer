@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { DateTime, Interval } from "luxon";
 
 import {
@@ -141,7 +142,7 @@ const mapDispatchToProps = {
   setTime
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(TimerContainer));
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles)
+)(TimerContainer);
