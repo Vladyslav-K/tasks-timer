@@ -1,44 +1,54 @@
-import { all, call, select, delay, put, takeLatest } from "redux-saga/effects";
-import { syncTasksList, syncTaskProps, stopTask } from "../domain/actions";
+import { all, select, put, takeLatest } from "redux-saga/effects";
+import {
+  syncTimerStartTime,
+  syncTasksList,
+  syncTaskName,
+  SET_TASKS_LIST_VALUE,
+  SET_TASK_NAME,
+  START_TASK,
+  STOP_TASK
+} from "../domain/actions";
 
-export function* syncStateAndStorage() {
-  yield delay(300);
+export function* putStartTimeInStorage() {
+  const timerStartTime = yield select(state => state.taskProps.timerStartTime);
 
-  const {
-    taskProps: { timerStartTime, taskName },
-    tasksList
-  } = yield select();
+  yield localStorage.setItem("StartTime", timerStartTime);
+}
 
-  yield call(() => {
-    localStorage.setItem("tasksList", JSON.stringify(tasksList));
+export function* putTaskNameInStorage() {
+  const taskName = yield select(state => state.taskProps.taskName);
 
-    localStorage.setItem(
-      "startTimeAndTaskName",
-      JSON.stringify({ timerStartTime, taskName })
-    );
-  });
+  yield localStorage.setItem("TaskName", taskName);
+}
+
+export function* deleteStartTimeAndNameInStorage() {
+  yield localStorage.removeItem("StartTime");
+  yield localStorage.removeItem("TaskName");
+}
+
+export function* putTasksListInStorage() {
+  const tasksList = yield select(state => state.tasksList);
+
+  yield localStorage.setItem("TasksList", JSON.stringify(tasksList));
 }
 
 export function* setStateFromStorage() {
-  const tasksList = yield call(() => {
-    return JSON.parse(localStorage.getItem("tasksList")) || [];
-  });
+  const tasksList = JSON.parse(localStorage.getItem("TasksList")) || [];
+  const timerStartTime = localStorage.getItem("StartTime") || null;
+  const taskName = localStorage.getItem("TaskName") || null;
 
-  const taskProps = yield call(() => {
-    return (
-      JSON.parse(localStorage.getItem("startTimeAndTaskName")) || stopTask()
-    );
-  });
-
+  yield put(syncTimerStartTime(timerStartTime));
   yield put(syncTasksList(tasksList));
-  yield put(syncTaskProps(taskProps));
-}
-
-export function* watcher() {
-  yield call(setStateFromStorage);
-  yield takeLatest("*", syncStateAndStorage);
+  yield put(syncTaskName(taskName));
 }
 
 export default function* rootSaga() {
-  yield all([watcher()]);
+  yield all([
+    setStateFromStorage(),
+    takeLatest(SET_TASKS_LIST_VALUE, putTasksListInStorage),
+    takeLatest(STOP_TASK, deleteStartTimeAndNameInStorage),
+    takeLatest(SET_TASK_NAME, putTaskNameInStorage),
+    takeLatest(START_TASK, putStartTimeInStorage),
+    takeLatest(STOP_TASK, putTasksListInStorage)
+  ]);
 }
