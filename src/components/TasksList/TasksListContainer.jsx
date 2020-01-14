@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { setTasksListValue } from "../../store/Timer/actions";
@@ -8,24 +8,25 @@ import TasksList from "./TasksList";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-function LogContainer(props) {
-  const { setTasksListValue, tasksList, classes } = props;
-
-  const deleteCurrentTask = id => {
-    const tasksListWithoutCurrentTask = tasksList.filter(
+class TasksListContainer extends Component {
+  deleteCurrentTask = id => {
+    const tasksListWithoutCurrentTask = this.props.tasksList.filter(
       task => task.id !== id
     );
 
-    setTasksListValue(tasksListWithoutCurrentTask);
+    this.props.setTasksListValue(tasksListWithoutCurrentTask);
   };
 
-  return (
-    <TasksList
-      deleteCurrentTask={deleteCurrentTask}
-      tasksList={tasksList}
-      classes={classes}
-    />
-  );
+  render() {
+    const { tasksList, classes } = this.props;
+    return (
+      <TasksList
+        deleteCurrentTask={this.deleteCurrentTask}
+        tasksList={tasksList}
+        classes={classes}
+      />
+    );
+  }
 }
 
 const mapStateToProps = ({ timer: { tasksList } }) => {
@@ -39,4 +40,4 @@ const mapDispatchToProps = { setTasksListValue };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(LogContainer));
+)(withStyles(styles)(TasksListContainer));

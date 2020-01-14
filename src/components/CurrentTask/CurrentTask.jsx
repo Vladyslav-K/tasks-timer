@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 import { DateTime, Interval } from "luxon";
 
@@ -8,40 +8,42 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-export default function Task(props) {
-  const { task, classes } = props;
-  const { card, taskName, buttonContainer, button } = classes;
+export default class CurrentTask extends PureComponent {
+  render() {
+    const { task, classes } = this.props;
+    const { card, taskName, buttonContainer, button } = classes;
 
-  return (
-    <Card key={task.id} className={card}>
-      <CardContent>
-        <Typography className={taskName} variant="h4" component="h2">
-          {`Task name: ${task.taskName}`}
-        </Typography>
-        <Typography component="p">
-          {DateTime.fromISO(task.timerStartTime).toFormat(
-            "'The timer was started on' yyyy-MM-dd 'at' HH:mm:ss"
-          )}
-        </Typography>
-        <Typography component="p">
-          {DateTime.fromISO(task.timerStopTime).toFormat(
-            "'The timer was stopped on' yyyy-MM-dd 'at' HH:mm:ss"
-          )}
-        </Typography>
-        <Typography component="p">
-          {Interval.fromDateTimes(
-            DateTime.fromISO(task.timerStartTime),
-            DateTime.fromISO(task.timerStopTime)
-          )
-            .toDuration()
-            .toFormat("'Time spent on task:' hh:mm:ss")}
-        </Typography>
-      </CardContent>
-      <CardActions className={buttonContainer}>
-        <Button className={button} size="small" component={Link} to="/tasks">
-          Back
-        </Button>
-      </CardActions>
-    </Card>
-  );
+    return (
+      <Card key={task.id} className={card}>
+        <CardContent>
+          <Typography className={taskName} variant="h4" component="h2">
+            {`Task name: ${task.taskName}`}
+          </Typography>
+          <Typography component="p">
+            {DateTime.fromISO(task.timerStartTime).toFormat(
+              "'The timer was started on' yyyy-MM-dd 'at' HH:mm:ss"
+            )}
+          </Typography>
+          <Typography component="p">
+            {DateTime.fromISO(task.timerStopTime).toFormat(
+              "'The timer was stopped on' yyyy-MM-dd 'at' HH:mm:ss"
+            )}
+          </Typography>
+          <Typography component="p">
+            {Interval.fromDateTimes(
+              DateTime.fromISO(task.timerStartTime),
+              DateTime.fromISO(task.timerStopTime)
+            )
+              .toDuration()
+              .toFormat("'Time spent on task:' hh:mm:ss")}
+          </Typography>
+        </CardContent>
+        <CardActions className={buttonContainer}>
+          <Button className={button} size="small" component={Link} to="/tasks">
+            Back
+          </Button>
+        </CardActions>
+      </Card>
+    );
+  }
 }

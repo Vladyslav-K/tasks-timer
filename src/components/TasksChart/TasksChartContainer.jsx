@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { DateTime } from "luxon";
 
@@ -14,10 +14,8 @@ const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min + 1);
 };
 
-function ChartContainer(props) {
-  const { setTasksListValue, tasksList, classes } = props;
-
-  const getRandomTasks = () => {
+class ChartContainer extends Component {
+  getRandomTasks = () => {
     const data = [];
 
     let timerStartTime = DateTime.fromObject({ hour: 0, minute: 0, second: 0 });
@@ -44,19 +42,24 @@ function ChartContainer(props) {
       timerStartTime = timerStopTime;
     }
 
-    setTasksListValue(data);
+    this.props.setTasksListValue(data);
   };
 
-  const data = createChartData(tasksList);
+  render() {
+    const { tasksList, classes } = this.props;
 
-  return (
-    <TasksChart
-      getRandomTasks={getRandomTasks}
-      chartData={data}
-      classes={classes}
-    />
-  );
+    const chartData = createChartData(tasksList);
+
+    return (
+      <TasksChart
+        getRandomTasks={this.getRandomTasks}
+        chartData={chartData}
+        classes={classes}
+      />
+    );
+  }
 }
+
 const mapStateToProps = ({ timer: { tasksList } }) => {
   return {
     tasksList
