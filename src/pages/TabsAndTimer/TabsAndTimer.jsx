@@ -7,14 +7,13 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import Timer from "../../components/Timer";
-import Alert from "../../components/Alert";
 import TasksChart from "../../components/TasksChart";
 import TasksList from "../../components/TasksList";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-class TasksTimer extends PureComponent {
+class TabsAndTimer extends PureComponent {
   render() {
     const { location, classes } = this.props;
     const { tasksTimerContainer, tabsContainer } = classes;
@@ -25,7 +24,6 @@ class TasksTimer extends PureComponent {
       <div className={tasksTimerContainer}>
         <Grid container justify="center">
           <Grid item xs={12} lg={10}>
-            <Alert />
             <Timer />
           </Grid>
           <Grid item xs={12} lg={10}>
@@ -57,4 +55,4 @@ class TasksTimer extends PureComponent {
   }
 }
 
-export default withStyles(styles)(TasksTimer);
+export default withStyles(styles)(TabsAndTimer);

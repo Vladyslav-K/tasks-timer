@@ -13,11 +13,20 @@ import {
 import { openAlertWindow } from "../../store/Alert/actions";
 
 import Timer from "./Timer";
+import TaskNameWarning from "../TaskNameWarning";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 class TimerContainer extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      taskNameIsEmpty: false
+    };
+  }
+
   intervalID = 0;
 
   componentDidMount() {
@@ -54,12 +63,6 @@ class TimerContainer extends Component {
     this.props.startTask(DateTime.local().toISO());
   };
 
-  verifyTaskName = () => {
-    const { taskProps, openAlertWindow } = this.props;
-
-    taskProps.taskName ? this.stopTimer() : openAlertWindow(true);
-  };
-
   stopTimer = () => {
     const { taskProps, stopTask, pushTaskInTasksList } = this.props;
 
@@ -80,6 +83,18 @@ class TimerContainer extends Component {
     return lastTaskId > 0 ? lastTaskId + 1 : 1;
   };
 
+  verifyTaskName = () => {
+    this.props.taskProps.taskName
+      ? this.stopTimer()
+      : this.changeModalVisibility();
+  };
+
+  changeModalVisibility = () => {
+    this.setState(prevState => {
+      return { taskNameIsEmpty: !prevState.taskNameIsEmpty };
+    });
+  };
+
   render() {
     const {
       time,
@@ -90,15 +105,24 @@ class TimerContainer extends Component {
     } = this.props;
 
     return (
-      <Timer
-        verifyTaskName={this.verifyTaskName}
-        startTimer={this.startTimer}
-        setTaskName={setTaskName}
-        timerStartTime={timerStartTime}
-        taskName={taskName}
-        time={time}
-        classes={classes}
-      />
+      <>
+        <Timer
+          changeModalVisibility={this.changeModalVisibility}
+          taskNameIsEmpty={this.state.taskNameIsEmpty}
+          verifyTaskName={this.verifyTaskName}
+          startTimer={this.startTimer}
+          setTaskName={setTaskName}
+          timerStartTime={timerStartTime}
+          taskName={taskName}
+          time={time}
+          classes={classes}
+        />
+
+        <TaskNameWarning
+          changeModalVisibility={this.changeModalVisibility}
+          taskNameIsEmpty={this.state.taskNameIsEmpty}
+        />
+      </>
     );
   }
 }

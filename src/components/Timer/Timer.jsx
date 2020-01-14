@@ -31,6 +31,7 @@ export default class Timer extends PureComponent {
         />
 
         <Fab className={timerFab}>{time}</Fab>
+
         {timerStartTime ? (
           <Button
             variant="contained"
