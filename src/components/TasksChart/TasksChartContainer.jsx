@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { DateTime } from "luxon";
 
 import createChartData from "./createChartData";
-import { setTasksListValue } from "../../store/Timer/actions";
+import { setTasksListValue } from "../../domain/actions";
 
 import TasksChart from "./TasksChart";
 
@@ -60,7 +60,7 @@ class ChartContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ timer: { tasksList } }) => {
+const mapStateToProps = ({ tasksList }) => {
   return {
     tasksList
   };

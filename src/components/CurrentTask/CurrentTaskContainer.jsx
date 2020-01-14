@@ -32,7 +32,7 @@ class CurrentTaskContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ timer: { tasksList } }) => {
+const mapStateToProps = ({ tasksList }) => {
   return {
     tasksList
   };

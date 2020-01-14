@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { setTasksListValue } from "../../store/Timer/actions";
+import { setTasksListValue } from "../../domain/actions";
 
 import TasksList from "./TasksList";
 
@@ -29,7 +29,7 @@ class TasksListContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ timer: { tasksList } }) => {
+const mapStateToProps = ({ tasksList }) => {
   return {
     tasksList
   };

@@ -8,9 +8,7 @@ import {
   startTask,
   stopTask,
   setTime
-} from "../../store/Timer/actions";
-
-import { openAlertWindow } from "../../store/Alert/actions";
+} from "../../domain/actions";
 
 import Timer from "./Timer";
 import TaskNameWarning from "../TaskNameWarning";
@@ -127,7 +125,7 @@ class TimerContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ timer: { taskProps, tasksList, time } }) => {
+const mapStateToProps = ({ taskProps, tasksList, time }) => {
   return {
     time,
     taskProps,
@@ -140,9 +138,7 @@ const mapDispatchToProps = {
   setTaskName,
   startTask,
   stopTask,
-  setTime,
-
-  openAlertWindow
+  setTime
 };
 
 export default connect(
