@@ -5,6 +5,7 @@ import {
   syncTaskName,
   SET_TASKS_LIST_VALUE,
   SET_TASK_NAME,
+  DELETE_TASK,
   START_TASK,
   STOP_TASK
 } from "../domain/actions";
@@ -48,6 +49,7 @@ export default function* rootSaga() {
     takeLatest(SET_TASKS_LIST_VALUE, putTasksListInStorage),
     takeLatest(STOP_TASK, deleteStartTimeAndNameInStorage),
     takeLatest(SET_TASK_NAME, putTaskNameInStorage),
+    takeLatest(DELETE_TASK, putTasksListInStorage),
     takeLatest(START_TASK, putStartTimeInStorage),
     takeLatest(STOP_TASK, putTasksListInStorage)
   ]);

@@ -4,6 +4,7 @@ export const SET_TASK_NAME = "SET_TASK_NAME";
 
 export const PUSH_TASK_IN_TASKS_LIST = "PUSH_TASK_IN_TASKS_LIST";
 export const SET_TASKS_LIST_VALUE = "SET_TASKS_LIST_VALUE";
+export const DELETE_TASK = "DELETE_TASK";
 
 export const SYNC_TIMER_START_TIME = "SYNC_TIMER_START_TIME";
 export const SYNC_TASKS_LIST = "SYNC_STATE_FROM_STORAGE";
@@ -27,6 +28,10 @@ export const pushTaskInTasksList = payload => {
 
 export const setTasksListValue = payload => {
   return { type: SET_TASKS_LIST_VALUE, payload };
+};
+
+export const deleteTask = payload => {
+  return { type: DELETE_TASK, payload };
 };
 
 export const syncTimerStartTime = payload => {

@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 
 export default class TasksList extends PureComponent {
   render() {
-    const { deleteCurrentTask, tasksList, classes } = this.props;
+    const { deleteTask, tasksList, classes } = this.props;
     const { tableRow, noTasks, tasksButton } = classes;
 
     return (
@@ -65,7 +65,7 @@ export default class TasksList extends PureComponent {
                     className={tasksButton}
                     variant="contained"
                     size="small"
-                    onClick={() => deleteCurrentTask(task.id)}
+                    onClick={() => deleteTask(task.id)}
                   >
                     Delete
                   </Button>

@@ -4,6 +4,7 @@ import {
   SET_TASK_NAME,
   PUSH_TASK_IN_TASKS_LIST,
   SET_TASKS_LIST_VALUE,
+  DELETE_TASK,
   SYNC_TIMER_START_TIME,
   SYNC_TASKS_LIST,
   SYNC_TASK_NAME
@@ -57,6 +58,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         tasksList: action.payload
+      };
+
+    case DELETE_TASK:
+      return {
+        ...state,
+        tasksList: state.tasksList.filter(task => task.id !== action.payload)
       };
 
     case SYNC_TIMER_START_TIME:
