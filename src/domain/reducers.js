@@ -1,7 +1,6 @@
 import {
   START_TASK,
   STOP_TASK,
-  SET_TIME,
   SET_TASK_NAME,
   SYNC_TASK_PROPS,
   PUSH_TASK_IN_TASKS_LIST,
@@ -10,8 +9,6 @@ import {
 } from "./actions";
 
 const initialState = {
-  time: "00:00:00",
-
   tasksList: [],
 
   taskProps: {
@@ -37,14 +34,7 @@ export default function reducer(state = initialState, action) {
     case STOP_TASK:
       return {
         ...state,
-        time: initialState.time,
         taskProps: initialState.taskProps
-      };
-
-    case SET_TIME:
-      return {
-        ...state,
-        time: action.payload
       };
 
     case SET_TASK_NAME:
