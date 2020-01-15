@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import createChartData from "../components/Chart/createChartData";
+import createChartData from "../components/TasksChart/createChartData";
 
 const createTestData = (startTime, stopTime) => {
   return [
