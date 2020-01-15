@@ -22,7 +22,8 @@ export function* putTaskNameInStorage() {
   yield localStorage.setItem("TaskName", taskName);
 }
 
-export function* deleteStartTimeAndNameInStorage() {
+export function* clearTaskPropsAndPutTasksListInStorage() {
+  yield putTasksListInStorage();
   yield localStorage.removeItem("StartTime");
   yield localStorage.removeItem("TaskName");
 }
@@ -46,11 +47,10 @@ export function* setStateFromStorage() {
 export default function* rootSaga() {
   yield all([
     setStateFromStorage(),
+    takeLatest(STOP_TASK, clearTaskPropsAndPutTasksListInStorage),
     takeLatest(SET_TASKS_LIST_VALUE, putTasksListInStorage),
-    takeLatest(STOP_TASK, deleteStartTimeAndNameInStorage),
     takeLatest(SET_TASK_NAME, putTaskNameInStorage),
     takeLatest(DELETE_TASK, putTasksListInStorage),
-    takeLatest(START_TASK, putStartTimeInStorage),
-    takeLatest(STOP_TASK, putTasksListInStorage)
+    takeLatest(START_TASK, putStartTimeInStorage)
   ]);
 }
