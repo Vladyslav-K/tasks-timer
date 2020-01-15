@@ -48,16 +48,15 @@ class TimerContainer extends Component {
   startTimer = () => {
     this.intervalID = setInterval(this.timer, 1000);
 
-    this.props.startTask(DateTime.local().toISO());
+    this.props.startTask();
   };
 
   stopTimer = () => {
-    const { stopTask } = this.props;
-
     this.setState({ time: "00:00:00" });
-    clearInterval(this.intervalID);
 
-    stopTask();
+    this.props.stopTask();
+
+    clearInterval(this.intervalID);
   };
 
   createTaskId = () => {

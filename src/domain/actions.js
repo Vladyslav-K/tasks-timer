@@ -9,8 +9,8 @@ export const SYNC_TIMER_START_TIME = "SYNC_TIMER_START_TIME";
 export const SYNC_TASKS_LIST = "SYNC_STATE_FROM_STORAGE";
 export const SYNC_TASK_NAME = "SYNC_TASK_NAME";
 
-export const startTask = payload => {
-  return { type: START_TASK, payload };
+export const startTask = () => {
+  return { type: START_TASK };
 };
 
 export const stopTask = () => {

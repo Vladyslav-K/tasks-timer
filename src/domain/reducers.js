@@ -27,8 +27,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         taskProps: {
           ...state.taskProps,
-          timerStopTime: null,
-          timerStartTime: action.payload
+          timerStartTime: new Date().toISOString()
         }
       };
 
