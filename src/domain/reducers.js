@@ -2,7 +2,6 @@ import {
   START_TASK,
   STOP_TASK,
   SET_TASK_NAME,
-  PUSH_TASK_IN_TASKS_LIST,
   SET_TASKS_LIST_VALUE,
   DELETE_TASK,
   SYNC_TIMER_START_TIME,
@@ -36,7 +35,18 @@ export default function reducer(state = initialState, action) {
     case STOP_TASK:
       return {
         ...state,
-        taskProps: initialState.taskProps
+        taskProps: initialState.taskProps,
+        tasksList: [
+          ...state.tasksList,
+          {
+            ...state.taskProps,
+            id:
+              state.tasksList.length > 0
+                ? Math.max(...state.tasksList.map(task => task.id)) + 1
+                : 1,
+            timerStopTime: new Date().toISOString()
+          }
+        ]
       };
 
     case SET_TASK_NAME:
@@ -46,12 +56,6 @@ export default function reducer(state = initialState, action) {
           ...state.taskProps,
           taskName: action.payload
         }
-      };
-
-    case PUSH_TASK_IN_TASKS_LIST:
-      return {
-        ...state,
-        tasksList: [...state.tasksList, action.payload]
       };
 
     case SET_TASKS_LIST_VALUE:

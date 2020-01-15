@@ -2,7 +2,6 @@ export const START_TASK = "START_TASK";
 export const STOP_TASK = "STOP_TASK";
 export const SET_TASK_NAME = "SET_TASK_NAME";
 
-export const PUSH_TASK_IN_TASKS_LIST = "PUSH_TASK_IN_TASKS_LIST";
 export const SET_TASKS_LIST_VALUE = "SET_TASKS_LIST_VALUE";
 export const DELETE_TASK = "DELETE_TASK";
 
@@ -20,10 +19,6 @@ export const stopTask = () => {
 
 export const setTaskName = payload => {
   return { type: SET_TASK_NAME, payload };
-};
-
-export const pushTaskInTasksList = payload => {
-  return { type: PUSH_TASK_IN_TASKS_LIST, payload };
 };
 
 export const setTasksListValue = payload => {

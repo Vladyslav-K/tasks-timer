@@ -3,12 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { DateTime, Interval } from "luxon";
 
-import {
-  pushTaskInTasksList,
-  setTaskName,
-  startTask,
-  stopTask
-} from "../../domain/actions";
+import { setTaskName, startTask, stopTask } from "../../domain/actions";
 
 import Timer from "./Timer";
 import TaskNameWarning from "../TaskNameWarning";
@@ -57,16 +52,10 @@ class TimerContainer extends Component {
   };
 
   stopTimer = () => {
-    const { taskProps, stopTask, pushTaskInTasksList } = this.props;
+    const { stopTask } = this.props;
 
     this.setState({ time: "00:00:00" });
     clearInterval(this.intervalID);
-
-    pushTaskInTasksList({
-      ...taskProps,
-      id: this.createTaskId(),
-      timerStopTime: DateTime.local().toISO()
-    });
 
     stopTask();
   };
@@ -131,7 +120,6 @@ const mapStateToProps = ({ taskProps, tasksList, time }) => {
 };
 
 const mapDispatchToProps = {
-  pushTaskInTasksList,
   setTaskName,
   startTask,
   stopTask
