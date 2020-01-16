@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
@@ -11,28 +11,24 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-class PageNotFound extends PureComponent {
-  render() {
-    const { container, buttonContainer } = this.props.classes;
-
-    return (
-      <Grid container className={container} justify="center">
-        <Card>
-          <CardContent>
-            <Typography variant="h4">There is no such task :(</Typography>
-            <Typography color="textSecondary">
-              Can try to find it on the home page?
-            </Typography>
-          </CardContent>
-          <CardActions className={buttonContainer}>
-            <Button size="small" component={Link} to={"/tasks"}>
-              Homepage
-            </Button>
-          </CardActions>
-        </Card>
-      </Grid>
-    );
-  }
+function PageNotFound({ classes: { container, buttonContainer } }) {
+  return (
+    <Grid container className={container} justify="center">
+      <Card>
+        <CardContent>
+          <Typography variant="h4">There is no such task :(</Typography>
+          <Typography color="textSecondary">
+            Can try to find it on the home page?
+          </Typography>
+        </CardContent>
+        <CardActions className={buttonContainer}>
+          <Button size="small" component={Link} to={"/tasks"}>
+            Homepage
+          </Button>
+        </CardActions>
+      </Card>
+    </Grid>
+  );
 }
 
-export default withStyles(styles)(PageNotFound);
+export default withStyles(styles)(memo(PageNotFound));

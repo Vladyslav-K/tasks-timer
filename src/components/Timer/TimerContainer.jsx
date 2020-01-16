@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { DateTime, Interval } from "luxon";
 
-import { setTaskName, startTask, stopTask } from "../../domain/actions";
+import { setTaskName, startTimer, stopTimer } from "../../domain/actions";
 
 import Timer from "./Timer";
 import TaskNameWarning from "../TaskNameWarning";
@@ -11,103 +11,67 @@ import TaskNameWarning from "../TaskNameWarning";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-class TimerContainer extends Component {
-  constructor() {
-    super();
+function TimerContainer({
+  setTaskName,
+  taskProps,
+  startTimer,
+  stopTimer,
+  classes
+}) {
+  const [taskNameIsEmpty, setTaskNameIsEmpty] = useState(false);
+  const [time, setTime] = useState("00:00:00");
 
-    this.state = {
-      time: "00:00:00",
-      taskNameIsEmpty: false
+  useEffect(() => {
+    let intervalID = 0;
+
+    const setTimerTime = () => {
+      setTime(
+        Interval.fromDateTimes(
+          DateTime.fromISO(taskProps.timerStartTime),
+          DateTime.local()
+        )
+          .toDuration()
+          .toFormat("hh:mm:ss")
+      );
     };
-  }
 
-  intervalID = 0;
-
-  componentDidMount() {
-    if (this.props.taskProps.timerStartTime) {
-      this.timer();
-      this.intervalID = setInterval(this.timer, 1000);
+    if (taskProps.timerStartTime) {
+      setTimerTime();
+      intervalID = setInterval(setTimerTime, 1000);
+    } else {
+      setTime("00:00:00");
     }
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalID);
-  }
+    return () => {
+      clearInterval(intervalID);
+    };
+  }, [taskProps.timerStartTime]);
 
-  timer = () => {
-    this.setState({
-      time: Interval.fromDateTimes(
-        DateTime.fromISO(this.props.taskProps.timerStartTime),
-        DateTime.local()
-      )
-        .toDuration()
-        .toFormat("hh:mm:ss")
-    });
+  const verifyTaskName = () => {
+    taskProps.taskName
+      ? stopTimer()
+      : setTaskNameIsEmpty(prevState => !prevState);
   };
 
-  startTimer = () => {
-    this.intervalID = setInterval(this.timer, 1000);
+  return (
+    <>
+      <Timer
+        timerStartTime={taskProps.timerStartTime}
+        taskNameIsEmpty={taskNameIsEmpty}
+        verifyTaskName={verifyTaskName}
+        setTaskName={setTaskName}
+        taskName={taskProps.taskName}
+        startTask={startTimer}
+        time={time}
+        classes={classes}
+      />
 
-    this.props.startTask();
-  };
-
-  stopTimer = () => {
-    this.setState({ time: "00:00:00" });
-
-    this.props.stopTask();
-
-    clearInterval(this.intervalID);
-  };
-
-  createTaskId = () => {
-    const { tasksList } = this.props;
-
-    const lastTaskId = Math.max(...tasksList.map(task => task.id));
-
-    return lastTaskId > 0 ? lastTaskId + 1 : 1;
-  };
-
-  verifyTaskName = () => {
-    this.props.taskProps.taskName
-      ? this.stopTimer()
-      : this.changeModalVisibility();
-  };
-
-  changeModalVisibility = () => {
-    this.setState(prevState => {
-      return { taskNameIsEmpty: !prevState.taskNameIsEmpty };
-    });
-  };
-
-  render() {
-    const {
-      taskProps: { timerStartTime, taskName },
-      setTaskName,
-
-      classes
-    } = this.props;
-
-    return (
-      <>
-        <Timer
-          changeModalVisibility={this.changeModalVisibility}
-          taskNameIsEmpty={this.state.taskNameIsEmpty}
-          verifyTaskName={this.verifyTaskName}
-          startTimer={this.startTimer}
-          setTaskName={setTaskName}
-          timerStartTime={timerStartTime}
-          time={this.state.time}
-          taskName={taskName}
-          classes={classes}
-        />
-
-        <TaskNameWarning
-          changeModalVisibility={this.changeModalVisibility}
-          taskNameIsEmpty={this.state.taskNameIsEmpty}
-        />
-      </>
-    );
-  }
+      <TaskNameWarning
+        setTaskNameIsEmpty={setTaskNameIsEmpty}
+        taskNameIsEmpty={taskNameIsEmpty}
+      />
+    </>
+  );
 }
 
 const mapStateToProps = ({ taskProps, tasksList, time }) => {
@@ -118,13 +82,7 @@ const mapStateToProps = ({ taskProps, tasksList, time }) => {
   };
 };
 
-const mapDispatchToProps = {
-  setTaskName,
-  startTask,
-  stopTask
-};
-
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, { setTaskName, startTimer, stopTimer }),
   withStyles(styles)
 )(TimerContainer);

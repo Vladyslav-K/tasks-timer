@@ -1,6 +1,6 @@
 import {
-  START_TASK,
-  STOP_TASK,
+  START_TIMER,
+  STOP_TIMER,
   SET_TASK_NAME,
   SET_TASKS_LIST_VALUE,
   DELETE_TASK,
@@ -22,7 +22,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case START_TASK:
+    case START_TIMER:
       return {
         ...state,
         taskProps: {
@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
         }
       };
 
-    case STOP_TASK:
+    case STOP_TIMER:
       return {
         ...state,
         taskProps: initialState.taskProps,

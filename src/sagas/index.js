@@ -1,4 +1,12 @@
-import { all, select, put, takeLatest } from "redux-saga/effects";
+import {
+  all,
+  call,
+  debounce,
+  select,
+  put,
+  takeLatest
+} from "redux-saga/effects";
+
 import {
   syncTimerStartTime,
   syncTasksList,
@@ -6,35 +14,38 @@ import {
   SET_TASKS_LIST_VALUE,
   SET_TASK_NAME,
   DELETE_TASK,
-  START_TASK,
-  STOP_TASK
+  START_TIMER,
+  STOP_TIMER
 } from "../domain/actions";
 
-export function* putStartTimeInStorage() {
+function* putStartTimeInStorage() {
   const timerStartTime = yield select(state => state.taskProps.timerStartTime);
 
-  yield localStorage.setItem("StartTime", timerStartTime);
+  localStorage.setItem("StartTime", timerStartTime);
 }
 
-export function* putTaskNameInStorage() {
+function* putTaskNameInStorage() {
   const taskName = yield select(state => state.taskProps.taskName);
 
-  yield localStorage.setItem("TaskName", taskName);
+  localStorage.setItem("TaskName", taskName);
 }
 
-export function* clearTaskPropsAndPutTasksListInStorage() {
-  yield putTasksListInStorage();
-  yield localStorage.removeItem("StartTime");
-  yield localStorage.removeItem("TaskName");
+function* debounceTaskName() {
+  yield debounce(250, SET_TASK_NAME, putTaskNameInStorage);
 }
 
-export function* putTasksListInStorage() {
+function* clearTaskPropsAndPutTasksListInStorage() {
+  yield call(() => putTasksListInStorage());
+  localStorage.removeItem("StartTime");
+  localStorage.removeItem("TaskName");
+}
+function* putTasksListInStorage() {
   const tasksList = yield select(state => state.tasksList);
 
-  yield localStorage.setItem("TasksList", JSON.stringify(tasksList));
+  localStorage.setItem("TasksList", JSON.stringify(tasksList));
 }
 
-export function* setStateFromStorage() {
+function* setStateFromStorage() {
   const tasksList = JSON.parse(localStorage.getItem("TasksList")) || [];
   const timerStartTime = localStorage.getItem("StartTime") || null;
   const taskName = localStorage.getItem("TaskName") || null;
@@ -46,11 +57,11 @@ export function* setStateFromStorage() {
 
 export default function* rootSaga() {
   yield all([
-    setStateFromStorage(),
-    takeLatest(STOP_TASK, clearTaskPropsAndPutTasksListInStorage),
+    call(() => setStateFromStorage()),
+    call(() => debounceTaskName()),
+    takeLatest(START_TIMER, putStartTimeInStorage),
+    takeLatest(STOP_TIMER, clearTaskPropsAndPutTasksListInStorage),
     takeLatest(SET_TASKS_LIST_VALUE, putTasksListInStorage),
-    takeLatest(SET_TASK_NAME, putTaskNameInStorage),
-    takeLatest(DELETE_TASK, putTasksListInStorage),
-    takeLatest(START_TASK, putStartTimeInStorage)
+    takeLatest(DELETE_TASK, putTasksListInStorage)
   ]);
 }

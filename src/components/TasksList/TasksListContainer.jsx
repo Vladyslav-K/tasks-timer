@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
@@ -9,17 +9,14 @@ import TasksList from "./TasksList";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-class TasksListContainer extends Component {
-  render() {
-    const { deleteTask, tasksList, classes } = this.props;
-    return (
-      <TasksList
-        deleteTask={deleteTask}
-        tasksList={tasksList}
-        classes={classes}
-      />
-    );
-  }
+function TasksListContainer({ deleteTask, tasksList, classes }) {
+  return (
+    <TasksList
+      deleteTask={deleteTask}
+      tasksList={tasksList}
+      classes={classes}
+    />
+  );
 }
 
 const mapStateToProps = ({ tasksList }) => {
@@ -28,9 +25,7 @@ const mapStateToProps = ({ tasksList }) => {
   };
 };
 
-const mapDispatchToProps = { deleteTask };
-
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, { deleteTask }),
   withStyles(styles)
 )(TasksListContainer);

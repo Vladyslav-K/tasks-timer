@@ -1,5 +1,5 @@
-export const START_TASK = "START_TASK";
-export const STOP_TASK = "STOP_TASK";
+export const START_TIMER = "START_TIMER";
+export const STOP_TIMER = "STOP_TIMER";
 export const SET_TASK_NAME = "SET_TASK_NAME";
 
 export const SET_TASKS_LIST_VALUE = "SET_TASKS_LIST_VALUE";
@@ -9,12 +9,12 @@ export const SYNC_TIMER_START_TIME = "SYNC_TIMER_START_TIME";
 export const SYNC_TASKS_LIST = "SYNC_STATE_FROM_STORAGE";
 export const SYNC_TASK_NAME = "SYNC_TASK_NAME";
 
-export const startTask = () => {
-  return { type: START_TASK };
+export const startTimer = () => {
+  return { type: START_TIMER };
 };
 
-export const stopTask = () => {
-  return { type: STOP_TASK };
+export const stopTimer = () => {
+  return { type: STOP_TIMER };
 };
 
 export const setTaskName = payload => {

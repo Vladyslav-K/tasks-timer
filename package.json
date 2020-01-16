@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.3.0",
     "gh-pages": "^2.1.1",
     "jest": "^24.9.0"
   }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { DateTime } from "luxon";
@@ -15,8 +15,8 @@ const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min + 1);
 };
 
-class ChartContainer extends Component {
-  getRandomTasks = () => {
+function ChartContainer({ setTasksListValue, tasksList, classes }) {
+  const getRandomTasks = () => {
     const data = [];
 
     let timerStartTime = DateTime.fromObject({ hour: 0, minute: 0, second: 0 });
@@ -43,22 +43,18 @@ class ChartContainer extends Component {
       timerStartTime = timerStopTime;
     }
 
-    this.props.setTasksListValue(data);
+    setTasksListValue(data);
   };
 
-  render() {
-    const { tasksList, classes } = this.props;
+  const chartData = createChartData(tasksList);
 
-    const chartData = createChartData(tasksList);
-
-    return (
-      <TasksChart
-        getRandomTasks={this.getRandomTasks}
-        chartData={chartData}
-        classes={classes}
-      />
-    );
-  }
+  return (
+    <TasksChart
+      getRandomTasks={getRandomTasks}
+      chartData={chartData}
+      classes={classes}
+    />
+  );
 }
 
 const mapStateToProps = ({ tasksList }) => {
@@ -67,9 +63,7 @@ const mapStateToProps = ({ tasksList }) => {
   };
 };
 
-const mapDispatchToProps = { setTasksListValue };
-
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, { setTasksListValue }),
   withStyles(styles)
 )(ChartContainer);
